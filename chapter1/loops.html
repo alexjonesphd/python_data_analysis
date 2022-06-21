@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>5. Loops &#8212; Introduction to Python for Psychologists</title>
+    <title>4. Loops &#8212; Introduction to Python for Psychologists</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -131,7 +131,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   5. Loops
+   4. Loops
   </a>
  </li>
 </ul>
@@ -354,12 +354,12 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#building-complexity-with-iteration">
-   5.1. Building complexity with iteration
+   4.1. Building complexity with iteration
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#enumerate">
-   5.2.
+   4.2.
    <code class="docutils literal notranslate">
     <span class="pre">
      enumerate
@@ -369,7 +369,7 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#iterating-over-dictionaries">
-   5.3. Iterating over dictionaries
+   4.3. Iterating over dictionaries
   </a>
  </li>
 </ul>
@@ -393,12 +393,12 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#building-complexity-with-iteration">
-   5.1. Building complexity with iteration
+   4.1. Building complexity with iteration
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#enumerate">
-   5.2.
+   4.2.
    <code class="docutils literal notranslate">
     <span class="pre">
      enumerate
@@ -408,7 +408,7 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#iterating-over-dictionaries">
-   5.3. Iterating over dictionaries
+   4.3. Iterating over dictionaries
   </a>
  </li>
 </ul>
@@ -422,13 +422,13 @@ title="Print to PDF"
               <div>
                 
   <section id="loops">
-<h1><span class="section-number">5. </span>Loops<a class="headerlink" href="#loops" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">4. </span>Loops<a class="headerlink" href="#loops" title="Permalink to this headline">#</a></h1>
 <p>Things are getting more advanced now. There is one programming practice that you should master to fully control your data.</p>
 <p>What we’ve seen so far is straightforward, defining collections like lists and dictionaries, and retrieving data from them through indexing. Sometimes, we want to do something with each element in a data collection - perhaps call a function on it, read a file, remove a piece of data, etc. How can we do this without manually accessing each element manually?</p>
 <p>The answer is the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, a special piece of syntax that allows us to <em>iterate</em> over a sequance or collection and retrieve the values inside by temporarily passing them to a new variable of whatever name we choose.</p>
 <p>The format looks like this:</p>
-<p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">variable</span> <span class="pre">in</span> <span class="pre">sequence:</span></code></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>`do something with variable`
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+    <span class="n">do</span> <span class="n">something</span> <span class="k">with</span> <span class="n">variable</span>
 </pre></div>
 </div>
 <p>Not the indentation on the second line - as you’ll see, this is part of the code. Python uses this to differentiate code that is in the for loop with that outside of it.</p>
@@ -478,7 +478,7 @@ title="Print to PDF"
 </div>
 </div>
 <section id="building-complexity-with-iteration">
-<h2><span class="section-number">5.1. </span>Building complexity with iteration<a class="headerlink" href="#building-complexity-with-iteration" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.1. </span>Building complexity with iteration<a class="headerlink" href="#building-complexity-with-iteration" title="Permalink to this headline">#</a></h2>
 <p>You aren’t limited to iterating just once. You can <strong>nest</strong> an iteration in the same way you can nest lists and dictionaries. This sometimes happens if you need to dig deeper into data structures to manipulate values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -528,7 +528,7 @@ Participant ID = 003, age = 40, sex = female
 </div>
 </section>
 <section id="enumerate">
-<h2><span class="section-number">5.2. </span><code class="docutils literal notranslate"><span class="pre">enumerate</span></code><a class="headerlink" href="#enumerate" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.2. </span><code class="docutils literal notranslate"><span class="pre">enumerate</span></code><a class="headerlink" href="#enumerate" title="Permalink to this headline">#</a></h2>
 <p>It should be clear from the above examples that when iterating over a list using <code class="docutils literal notranslate"><span class="pre">for</span></code>, we get back a variable that changes at each iteration. This is usually fine, but sometimes, we want to know the <strong>actual position</strong> of the element and do something with that.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">enumerate</span></code> function is used for dealing with this. We call <code class="docutils literal notranslate"><span class="pre">enumerate</span></code> on a sequence when we set up a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, and it returns a pair of variables - a counter, that returns the index, and a value, that returns the element, just like a normal <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
 <p>The syntax looks like this!</p>
@@ -597,7 +597,7 @@ value
 </div>
 </section>
 <section id="iterating-over-dictionaries">
-<h2><span class="section-number">5.3. </span>Iterating over dictionaries<a class="headerlink" href="#iterating-over-dictionaries" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.3. </span>Iterating over dictionaries<a class="headerlink" href="#iterating-over-dictionaries" title="Permalink to this headline">#</a></h2>
 <p>Dictionaries are a somewhat more complex structure compared to lists. For example, they don’t ‘remember’ the order things were put in them, depending on the version of Python you use, so iterating over them in the same way as lists doesn’t always make sense.</p>
 <p>If we remember the <strong>methods</strong> dictionaries had, we can iterate over those to access and play around with created dictionaries.</p>
 <div class="cell docutils container">
