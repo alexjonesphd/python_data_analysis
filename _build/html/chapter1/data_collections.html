@@ -1,0 +1,1140 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2. Data collections &#8212; Introduction to Python for Psychologists</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Functions" href="functions_loops.html" />
+    <link rel="prev" title="1. The Basics" href="the_basics.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Python for Psychologists</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  The Basics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="the_basics.html">
+   1. The Basics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   2. Data collections
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functions_loops.html">
+   4. Functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  NumPy
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter2/data_handling_numpy.html">
+   9. Data Handling with Python
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/chapter1/data_collections.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter1/data_collections.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/chapter1/data_collections.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2. Data collections
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-list">
+     2.1. The list
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     2.2. The list
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#simple-indexing">
+       2.2.1. Simple indexing
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#list-slicing">
+     2.3. List slicing
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stepped-indexing">
+     2.4. Stepped indexing
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#list-methods-and-other-tricks">
+     2.5. List
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .methods
+      </span>
+     </code>
+     and other tricks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-dictionary-look-it-up">
+   3. The dictionary - look it up!
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#looking-things-up-in-the-dictionary">
+     3.1. Looking things up in the dictionary
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-data-to-the-dictionary">
+     3.2. Adding data to the dictionary
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#important-dictionary-methods">
+     3.3. Important dictionary methods
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#advanced-dictionaries">
+     3.4. Advanced dictionaries
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Data collections</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2. Data collections
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-list">
+     2.1. The list
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     2.2. The list
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#simple-indexing">
+       2.2.1. Simple indexing
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#list-slicing">
+     2.3. List slicing
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stepped-indexing">
+     2.4. Stepped indexing
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#list-methods-and-other-tricks">
+     2.5. List
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .methods
+      </span>
+     </code>
+     and other tricks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-dictionary-look-it-up">
+   3. The dictionary - look it up!
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#looking-things-up-in-the-dictionary">
+     3.1. Looking things up in the dictionary
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-data-to-the-dictionary">
+     3.2. Adding data to the dictionary
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#important-dictionary-methods">
+     3.3. Important dictionary methods
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#advanced-dictionaries">
+     3.4. Advanced dictionaries
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="data-collections">
+<h1><span class="section-number">2. </span>Data collections<a class="headerlink" href="#data-collections" title="Permalink to this headline">#</a></h1>
+<p>So far, we’ve seen data stored in single variables. But we usually want to collect data together somehow - different variables for each participants, different experimental conditions, or different data files for each participants.</p>
+<p>How can a bunch of variables be stored together? Python has a range of <code class="docutils literal notranslate"><span class="pre">collections</span></code> - special structures that can store data together. The two we’ll focus on are called <code class="docutils literal notranslate"><span class="pre">lists</span></code> and <code class="docutils literal notranslate"><span class="pre">dictionaries</span></code>.</p>
+<section id="the-list">
+<h2><span class="section-number">2.1. </span>The list<a class="headerlink" href="#the-list" title="Permalink to this headline">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">list</span></code> is a workhorse of data manipulation and analysis. A list is group of variables of various types, set in a particular order, that are stored together in a single variable.</p>
+<p>Consider this example from an analysis perspective - data from an experimental participant on a personality test. It would be clumsy to refer to these all the time individually, so let’s use a list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define some data variables</span>
+<span class="n">pid</span> <span class="o">=</span> <span class="s1">&#39;001&#39;</span><span class="p">;</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">29</span><span class="p">;</span> <span class="n">sex</span> <span class="o">=</span> <span class="s1">&#39;female&#39;</span><span class="p">;</span> <span class="n">extraversion</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="n">neuroticism</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Store these in a list!</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">pid</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">sex</span><span class="p">,</span> <span class="n">extraversion</span><span class="p">,</span> <span class="n">neuroticism</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;001&#39;, 29, &#39;female&#39;, 5, 3]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data is now stored together in one collection, with varying types. Each part of a list is known as an element, and has a position. It’s worth noting that each element can be any Python data type or structure - even another list!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nested list</span>
+<span class="n">nest</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;inside&#39;</span><span class="p">,</span> <span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;list&#39;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nest</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 4, 5, [&#39;inside&#39;, &#39;the&#39;, &#39;list&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h2><span class="section-number">2.2. </span>The list<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>We’ve got our data in a list. But what if we need to interact with the elements? How can we access different elements? Using an <code class="docutils literal notranslate"><span class="pre">index</span></code>, and different <code class="docutils literal notranslate"><span class="pre">methods</span></code>.</p>
+<p>Welcome to one of Python’s quirkiest parts: list indexing.</p>
+<section id="simple-indexing">
+<h3><span class="section-number">2.2.1. </span>Simple indexing<a class="headerlink" href="#simple-indexing" title="Permalink to this headline">#</a></h3>
+<p>You can access any element of a list by passing its <strong>index value</strong> to the list variable, using square brackets, <code class="docutils literal notranslate"><span class="pre">[]</span></code>, in this format:
+<code class="docutils literal notranslate"><span class="pre">list_name[number]</span></code>.
+List indexing <strong>starts from zero</strong>. That is, the first element is in the ‘0th’ position.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the participant ID from the data list</span>
+<span class="n">retrieved_pid</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">retrieved_pid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>001
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the extraversion score</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lists can also be accessed in reverse order, by using negative indexes!</span>
+<span class="c1"># Grab the final element of a list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or grab the FIRST element of a list using reverse indexing</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>001
+</pre></div>
+</div>
+</div>
+</div>
+<p>A graphic for rememebring list indexing:
+<img alt="List%20Index.png" src="chapter1/attachment:List%20Index.png" /></p>
+</section>
+</section>
+<section id="list-slicing">
+<h2><span class="section-number">2.3. </span>List slicing<a class="headerlink" href="#list-slicing" title="Permalink to this headline">#</a></h2>
+<p>Getting things out of a list one by one would involve a lot of typing. Often, we might want to access a range of values all at once. This is achieved through specific notation using a colon, <code class="docutils literal notranslate"><span class="pre">:</span></code>, and specific index locations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The first few elements of `data` have demographics. Let&#39;s get those out</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;001&#39;, 29, &#39;female&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or if you are starting from the very beginning, the 0 can be omitted</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;001&#39;, 29, &#39;female&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reverse slicing works in the same way</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;female&#39;, 5, 3]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nested lists can be indexed one after the other </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nest</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nest</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 4, 5, [&#39;inside&#39;, &#39;the&#39;, &#39;list&#39;]]
+list
+</pre></div>
+</div>
+</div>
+</div>
+<p>Do you notice anything interesting about the slicing? To access the first three elements, you have to pass <code class="docutils literal notranslate"><span class="pre">[0:3]</span></code>. List slicing works on the basis that:</p>
+<ul class="simple">
+<li><p>The first value specifies the start and is <em><strong>included</strong></em>.</p></li>
+<li><p>The value after the colon specifics the end and is <em><strong>not</strong></em> included.</p></li>
+</ul>
+<p>A good way of remembering this is to think Python sees a slice as ‘start here, and take <em><strong>up to, but not including</strong></em> this number’</p>
+</section>
+<section id="stepped-indexing">
+<h2><span class="section-number">2.4. </span>Stepped indexing<a class="headerlink" href="#stepped-indexing" title="Permalink to this headline">#</a></h2>
+<p>It’s possible to use different steps to jump over lists in different ways, using a set of three values and colon operators, that specify where to start, where to stop, and how many steps to take, like this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">a_list[start:stop:steps]</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a longer list</span>
+<span class="n">long</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="s1">&#39;st&#39;</span><span class="p">,</span> <span class="mf">4.321</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Index with steps</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">long</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 45, 77]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Another variation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">long</span><span class="p">[:</span><span class="mi">5</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;a&#39;, 45]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># In reverse!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">long</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[77, &#39;d&#39;, 45, &#39;c&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="list-methods-and-other-tricks">
+<h2><span class="section-number">2.5. </span>List <code class="docutils literal notranslate"><span class="pre">.methods</span></code> and other tricks<a class="headerlink" href="#list-methods-and-other-tricks" title="Permalink to this headline">#</a></h2>
+<p>Lists are pretty powerful, but there additional things that make them even cooler. Lists (along with many other data structures in Python) have <strong>methods</strong>. A <strong>method</strong> is a function that ‘lives’ in a variable, and can do specific things to the data in that variable. Not all data structures have methods, but the ones that do usually have great uses. A method is accessed by the <code class="docutils literal notranslate"><span class="pre">.</span></code> operator.</p>
+<p>Let’s say we want to add data to a list. How can we do this? Using the <code class="docutils literal notranslate"><span class="pre">.append</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add some Agreeableness scores to the personality data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;001&#39;, 29, &#39;female&#39;, 5, 3]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define Agreeableness score</span>
+<span class="n">agreeableness</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1"># Append it!</span>
+<span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">agreeableness</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;001&#39;, 29, &#39;female&#39;, 5, 3, 1]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sometimes, you can’t remember the location of a specific element in a list when you want to get to it. There is an <code class="docutils literal notranslate"><span class="pre">.index</span></code> method that takes a value that is in the list, and will return the index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We need the position of the sex variable. We know they are female, so...</span>
+<span class="n">ind</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;female&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span>
+
+<span class="c1"># Use that index</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+female
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lists can be interacted with using the <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">+</span></code> operators, which result in interesting manipulations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make two lists</span>
+<span class="n">list_a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">];</span> <span class="n">list_b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Try addition...</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_a</span> <span class="o">+</span> <span class="n">list_b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3, 2, 1, 4, 5, 6]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># What if I multiply a list?</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_a</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3, 2, 1, 3, 2, 1, 3, 2, 1]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multiple operators</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_a</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">list_b</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3, 2, 1, 3, 2, 1, 3, 2, 1, 4, 5, 6, 4, 5, 6]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We may sometimes want to alter lists in some way. That’s easy enough to do using slicing or methods. Lists are known as a <strong>mutable</strong> data structure, because you can alter them once you have created them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update the data list with new participant data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Update the scores</span>
+<span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;001&#39;, 29, &#39;female&#39;, 5, 3, 1]
+[&#39;001&#39;, 29, &#39;female&#39;, 5, 5, 5]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="the-dictionary-look-it-up">
+<h1><span class="section-number">3. </span>The dictionary - look it up!<a class="headerlink" href="#the-dictionary-look-it-up" title="Permalink to this headline">#</a></h1>
+<p>Lists are powerful ways to store variables and data of many different types. But it can be hard to keep track of what kind of variable is in what element. For example, in the <code class="docutils literal notranslate"><span class="pre">data</span></code> list, the first few elements were demographic data. Was the age the second element, or the third?</p>
+<p>That’s not easy to remember. Fortunately, another data structure, the <code class="docutils literal notranslate"><span class="pre">dictionary</span></code>, addresses these shortcomings, by providing a set of <em>key:value</em> pairs, which are defined using curly braces notation <code class="docutils literal notranslate"><span class="pre">{}</span></code>. The keys must be an <strong>immutable</strong> data structure - a string usually works!</p>
+<p>We can define a dictionary with some demographic data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a dictionary</span>
+<span class="n">demographics</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;PID&#39;</span><span class="p">:</span><span class="s1">&#39;001&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">:</span><span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;Sex&#39;</span><span class="p">:</span><span class="s1">&#39;Female&#39;</span><span class="p">}</span>
+
+<span class="c1"># Or use the `dict` function, assigning the values with keyword arguments</span>
+<span class="n">demographics_1</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">PID</span><span class="o">=</span><span class="s1">&#39;001&#39;</span><span class="p">,</span> <span class="n">Age</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">Sex</span><span class="o">=</span><span class="s1">&#39;Female&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">demographics</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demographics_1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;PID&#39;: &#39;001&#39;, &#39;Age&#39;: 30, &#39;Sex&#39;: &#39;Female&#39;}
+{&#39;PID&#39;: &#39;001&#39;, &#39;Age&#39;: 30, &#39;Sex&#39;: &#39;Female&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="looking-things-up-in-the-dictionary">
+<h2><span class="section-number">3.1. </span>Looking things up in the dictionary<a class="headerlink" href="#looking-things-up-in-the-dictionary" title="Permalink to this headline">#</a></h2>
+<p>Getting a value from a dictionary is as easy as providing the <strong>key</strong>, following this format.</p>
+<p><code class="docutils literal notranslate"><span class="pre">dictionary_name[key_name]</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the participant sex</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Female
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="adding-data-to-the-dictionary">
+<h2><span class="section-number">3.2. </span>Adding data to the dictionary<a class="headerlink" href="#adding-data-to-the-dictionary" title="Permalink to this headline">#</a></h2>
+<p>Adding extra data is as simple as providing a new <em>key:value</em> pair. Entire extra dictionaries can be provided through the dictionary <code class="docutils literal notranslate"><span class="pre">.update</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add a score to the data</span>
+<span class="n">demographics</span><span class="p">[</span><span class="s1">&#39;Extraversion&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demographics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;PID&#39;: &#39;001&#39;, &#39;Age&#39;: 30, &#39;Sex&#39;: &#39;Female&#39;, &#39;Extraversion&#39;: 4}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new dictionary of scores to be added</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Agreeableness</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">Neuroticism</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">Openness</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Conscientiousness</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Call the update method on the demographics dictionary</span>
+<span class="n">demographics</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">demographics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;PID&#39;: &#39;001&#39;, &#39;Age&#39;: 30, &#39;Sex&#39;: &#39;Female&#39;, &#39;Extraversion&#39;: 4, &#39;Agreeableness&#39;: 4, &#39;Neuroticism&#39;: 2, &#39;Openness&#39;: 1, &#39;Conscientiousness&#39;: 3}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="important-dictionary-methods">
+<h2><span class="section-number">3.3. </span>Important dictionary methods<a class="headerlink" href="#important-dictionary-methods" title="Permalink to this headline">#</a></h2>
+<p>Like lists, dictionaries have a range of methods. Some useful ones to know are the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.keys()</span></code> : returns a list of all the keys in the dictionary, useful if you aren’t sure whats inside one.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.values()</span></code> : returns a list of all the values (i.e. data) in the dictionary. Allows a look directly at the data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.items()</span></code> : returns a list, where each element is a tuple (like a list, but immutable), where the first element is the key, and the second, the value.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Look at the keys </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demographics</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_items([(&#39;PID&#39;, &#39;001&#39;), (&#39;Age&#39;, 30), (&#39;Sex&#39;, &#39;Female&#39;), (&#39;Extraversion&#39;, 4), (&#39;Agreeableness&#39;, 4), (&#39;Neuroticism&#39;, 2), (&#39;Openness&#39;, 1), (&#39;Conscientiousness&#39;, 3)])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Look at the values</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demographics</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_values([&#39;001&#39;, 30, &#39;Female&#39;, 4, 4, 2, 1, 3])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Look at it all!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demographics</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_items([(&#39;PID&#39;, &#39;001&#39;), (&#39;Age&#39;, 30), (&#39;Sex&#39;, &#39;Female&#39;), (&#39;Extraversion&#39;, 4), (&#39;Agreeableness&#39;, 4), (&#39;Neuroticism&#39;, 2), (&#39;Openness&#39;, 1), (&#39;Conscientiousness&#39;, 3)])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="advanced-dictionaries">
+<h2><span class="section-number">3.4. </span>Advanced dictionaries<a class="headerlink" href="#advanced-dictionaries" title="Permalink to this headline">#</a></h2>
+<p>Like lists, dictionaries can also be nested, with a key referring to another dictionary.</p>
+<p>It follows that a value can be anything - a list, dictionary, string, or any of Python’s many data types.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Demonstrate a nested dictionary</span>
+<span class="n">nest_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;PID&#39;</span><span class="p">:</span> <span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;Personality&#39;</span><span class="p">:{</span><span class="s1">&#39;Extra&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Neuro&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Accessing nested attributes</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nest_dict</span><span class="p">[</span><span class="s1">&#39;Personality&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nest_dict</span><span class="p">[</span><span class="s1">&#39;Personality&#39;</span><span class="p">][</span><span class="s1">&#39;Extra&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Extra&#39;: 4, &#39;Neuro&#39;: 1}
+4
+</pre></div>
+</div>
+</div>
+</div>
+<p>It should be clear by now that lists and dictionaries can be used together, to build complex data structures capable of storing a range of variables and data. Extracting data from a complex data structure is relatively straightforward, armed with what we know.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a somewhat complex data structure - notice we can split long commands across lines</span>
+<span class="n">participantA</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;PID&#39;</span><span class="p">:</span> <span class="s1">&#39;001&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span> 
+               <span class="s1">&#39;Anxiety_Score&#39;</span><span class="p">:{</span><span class="s1">&#39;Subscale1&#39;</span><span class="p">:</span> <span class="mf">4.22</span><span class="p">,</span> <span class="s1">&#39;Subscale2&#39;</span><span class="p">:</span> <span class="mf">2.34</span> <span class="p">},</span>
+              <span class="s1">&#39;RTs&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">321</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">593</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">129</span><span class="p">]}</span>
+
+<span class="n">participantB</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;PID&#39;</span><span class="p">:</span> <span class="s1">&#39;002&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> 
+               <span class="s1">&#39;Anxiety_Score&#39;</span><span class="p">:{</span><span class="s1">&#39;Subscale1&#39;</span><span class="p">:</span> <span class="mf">1.20</span><span class="p">,</span> <span class="s1">&#39;Subscale2&#39;</span><span class="p">:</span> <span class="mf">5.24</span> <span class="p">},</span>
+              <span class="s1">&#39;RTs&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">876</span><span class="p">,</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">291</span><span class="p">,</span> <span class="mi">893</span><span class="p">,</span> <span class="mi">864</span><span class="p">,</span> <span class="mi">456</span><span class="p">,</span> <span class="mi">983</span><span class="p">]}</span>
+
+<span class="n">full_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ppt_A&#39;</span><span class="p">:</span> <span class="n">participantA</span><span class="p">,</span> <span class="s1">&#39;ppt_B&#39;</span><span class="p">:</span> <span class="n">participantB</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extracting buried items - extract the last reaction time they gave</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">full_data</span><span class="p">[</span><span class="s1">&#39;ppt_A&#39;</span><span class="p">][</span><span class="s1">&#39;RTs&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>129
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or anxiety scores</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">full_data</span><span class="p">[</span><span class="s1">&#39;ppt_B&#39;</span><span class="p">][</span><span class="s1">&#39;Anxiety_Score&#39;</span><span class="p">][</span><span class="s1">&#39;Subscale1&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="the_basics.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">1. </span>The Basics</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="functions_loops.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Functions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alex Jones, Ph.D<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

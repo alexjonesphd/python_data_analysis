@@ -1,0 +1,18 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - caption: The Basics 
+    numbered: True  # Only applies to chapters in Part 1.
+    chapters:
+    - file: chapter1/the_basics
+    - file: chapter1/data_collections
+    - file: chapter1/functions_loops
+  - caption: NumPy
+    numbered: True
+    chapters:
+      - file: chapter2/data_handling_numpy
+
+
