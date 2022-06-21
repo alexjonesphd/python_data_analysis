@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Functions &#8212; Introduction to Python for Psychologists</title>
+    <title>5. Loops &#8212; Introduction to Python for Psychologists</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5. Data Handling with Python" href="../chapter2/data_handling_numpy.html" />
-    <link rel="prev" title="2. Data collections" href="data_collections.html" />
+    <link rel="next" title="1. Data Handling with Python" href="../chapter2/data_handling_numpy.html" />
+    <link rel="prev" title="3. Functions" href="functions.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -124,9 +124,14 @@ const thebe_selector_output = ".output, .cell_output"
    2. Data collections
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functions.html">
+   3. Functions
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   3. Functions
+   5. Loops
   </a>
  </li>
 </ul>
@@ -138,7 +143,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../chapter2/data_handling_numpy.html">
-   5. Data Handling with Python
+   1. Data Handling with Python
   </a>
  </li>
 </ul>
@@ -200,7 +205,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/chapter1/functions_loops.ipynb"
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/chapter1/loops.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -260,7 +265,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter1/functions_loops.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter1/loops.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -288,7 +293,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/chapter1/functions_loops.ipynb"
+        <a href="../_sources/chapter1/loops.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -347,67 +352,25 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   3. Functions
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#building-complexity-with-iteration">
+   5.1. Building complexity with iteration
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#examples-of-functions">
-     3.1. Examples of functions
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#default-arguments">
-       3.1.1. Default arguments
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#help">
-     3.2.
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       help
-      </span>
-     </code>
-     !
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#methods">
-     3.3. Methods
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#loops">
-   4. Loops
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enumerate">
+   5.2.
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     enumerate
+    </span>
+   </code>
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#building-complexity-with-iteration">
-     4.1. Building complexity with iteration
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#enumerate">
-     4.2.
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       enumerate
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#iterating-over-dictionaries">
-     4.3. Iterating over dictionaries
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iterating-over-dictionaries">
+   5.3. Iterating over dictionaries
+  </a>
  </li>
 </ul>
 
@@ -418,7 +381,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Functions</h1>
+                <h1>Loops</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -428,67 +391,25 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   3. Functions
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#building-complexity-with-iteration">
+   5.1. Building complexity with iteration
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#examples-of-functions">
-     3.1. Examples of functions
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#default-arguments">
-       3.1.1. Default arguments
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#help">
-     3.2.
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       help
-      </span>
-     </code>
-     !
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#methods">
-     3.3. Methods
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#loops">
-   4. Loops
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enumerate">
+   5.2.
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     enumerate
+    </span>
+   </code>
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#building-complexity-with-iteration">
-     4.1. Building complexity with iteration
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#enumerate">
-     4.2.
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       enumerate
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#iterating-over-dictionaries">
-     4.3. Iterating over dictionaries
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iterating-over-dictionaries">
+   5.3. Iterating over dictionaries
+  </a>
  </li>
 </ul>
 
@@ -500,196 +421,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="functions">
-<h1><span class="section-number">3. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">#</a></h1>
-<p>Functions are nothing new to you - we have used them before!</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">print</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p></li>
-</ul>
-<p>A function is a piece of reusable code that is suited for a particular task, that can be reused. Python has thousands of functions built in, as well as across different packages we will come to in the future.</p>
-<section id="examples-of-functions">
-<h2><span class="section-number">3.1. </span>Examples of functions<a class="headerlink" href="#examples-of-functions" title="Permalink to this headline">#</a></h2>
-<p>How do we use functions? With the following general approach:</p>
-<p><code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">=</span> <span class="pre">function_name(work_on_this,</span> <span class="pre">more_arguments)</span></code></p>
-<p>Two built in functions we can play with are <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example</span>
-<span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.39</span><span class="p">,</span> <span class="mf">1.12</span><span class="p">,</span> <span class="mf">5.21</span><span class="p">,</span> <span class="mf">8.92</span><span class="p">,</span> <span class="mf">1.24</span><span class="p">]</span>
-
-<span class="c1"># Find the range by using min and max</span>
-<span class="n">lowest</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
-<span class="n">highest</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
-
-<span class="c1"># Compute the span</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">highest</span> <span class="o">-</span> <span class="n">lowest</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.8
-</pre></div>
-</div>
-</div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">max</span></code> and <code class="docutils literal notranslate"><span class="pre">min</span></code> are really simple functions, with a single input. Sometimes functions have more than one input, or <strong>argument</strong>. More than one argument is entered by separating with a <code class="docutils literal notranslate"><span class="pre">,</span></code>.</p>
-<p>A common data analysis function is <code class="docutils literal notranslate"><span class="pre">round</span></code>, which rounds numbers to a degree of precision set by you. Its first input is a value you want to round, and the second is the level of precision you want.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multi-argument function example</span>
-<span class="n">value</span> <span class="o">=</span> <span class="mf">3.193849291</span>
-
-<span class="c1"># Use round </span>
-<span class="n">rounded</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">rounded</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.194
-</pre></div>
-</div>
-</div>
-</div>
-<section id="default-arguments">
-<h3><span class="section-number">3.1.1. </span>Default arguments<a class="headerlink" href="#default-arguments" title="Permalink to this headline">#</a></h3>
-<p>Functions often have what are known as default arguments. What happens if we just give <code class="docutils literal notranslate"><span class="pre">round</span></code> a single argument, the number we want to round?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Testing round</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
-</pre></div>
-</div>
-</div>
-</div>
-<p>Python has made a guess about what you want - rounded to a whole number. That is, the second argument has a <strong>default</strong> value - zero.</p>
-</section>
-</section>
-<section id="help">
-<h2><span class="section-number">3.2. </span><code class="docutils literal notranslate"><span class="pre">help</span></code>!<a class="headerlink" href="#help" title="Permalink to this headline">#</a></h2>
-<p>If you ever get confused about what a function does, or what arguments it requires, you can ask for help.
-<code class="docutils literal notranslate"><span class="pre">help</span></code> is a function whose job is to give you a print out of how a function works. What does it say about <code class="docutils literal notranslate"><span class="pre">round</span></code>?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get help on round</span>
-<span class="n">help</span><span class="p">(</span><span class="nb">round</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on built-in function round in module builtins:
-
-round(number, ndigits=None)
-    Round a number to a given precision in decimal digits.
-    
-    The return value is an integer if ndigits is omitted or None.  Otherwise
-    the return value has the same type as the number.  ndigits may be negative.
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="methods">
-<h2><span class="section-number">3.3. </span>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h2>
-<p>We’ve seen methods before - the special functions that a <code class="docutils literal notranslate"><span class="pre">list</span></code> can use to make alterations to itself.</p>
-<p>But methods are everywhere, and depend on the variable in question. You can use <code class="docutils literal notranslate"><span class="pre">help</span></code> on a specific data type to see what methods it has.</p>
-<p><code class="docutils literal notranslate"><span class="pre">string</span></code> data has a range of useful methods that make working with text data simple.</p>
-<p>For example, we can use:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">.upper()</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.lower()</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.count()</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.split()</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.join()</span></code></p></li>
-</ul>
-<p>for various exciting possibilities.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a string</span>
-<span class="n">basic</span> <span class="o">=</span> <span class="s1">&#39;We are going to play with this!&#39;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># How does .upper() work?</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">basic</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WE ARE GOING TO PLAY WITH THIS!
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># So lower should...</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">basic</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>we are going to play with this!
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># How many &#39;a&#39;s in this sentence?</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">basic</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chop this up by the number of space</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">basic</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;We&#39;, &#39;are&#39;, &#39;going&#39;, &#39;to&#39;, &#39;play&#39;, &#39;with&#39;, &#39;this!&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Join is cool!</span>
-<span class="n">split_list</span> <span class="o">=</span> <span class="n">basic</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">split_list</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>We!are!going!to!play!with!this!
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="loops">
-<h1><span class="section-number">4. </span>Loops<a class="headerlink" href="#loops" title="Permalink to this headline">#</a></h1>
+  <section id="loops">
+<h1><span class="section-number">5. </span>Loops<a class="headerlink" href="#loops" title="Permalink to this headline">#</a></h1>
 <p>Things are getting more advanced now. There is one programming practice that you should master to fully control your data.</p>
 <p>What we’ve seen so far is straightforward, defining collections like lists and dictionaries, and retrieving data from them through indexing. Sometimes, we want to do something with each element in a data collection - perhaps call a function on it, read a file, remove a piece of data, etc. How can we do this without manually accessing each element manually?</p>
 <p>The answer is the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, a special piece of syntax that allows us to <em>iterate</em> over a sequance or collection and retrieve the values inside by temporarily passing them to a new variable of whatever name we choose.</p>
@@ -745,7 +478,7 @@ round(number, ndigits=None)
 </div>
 </div>
 <section id="building-complexity-with-iteration">
-<h2><span class="section-number">4.1. </span>Building complexity with iteration<a class="headerlink" href="#building-complexity-with-iteration" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.1. </span>Building complexity with iteration<a class="headerlink" href="#building-complexity-with-iteration" title="Permalink to this headline">#</a></h2>
 <p>You aren’t limited to iterating just once. You can <strong>nest</strong> an iteration in the same way you can nest lists and dictionaries. This sometimes happens if you need to dig deeper into data structures to manipulate values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -795,7 +528,7 @@ Participant ID = 003, age = 40, sex = female
 </div>
 </section>
 <section id="enumerate">
-<h2><span class="section-number">4.2. </span><code class="docutils literal notranslate"><span class="pre">enumerate</span></code><a class="headerlink" href="#enumerate" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.2. </span><code class="docutils literal notranslate"><span class="pre">enumerate</span></code><a class="headerlink" href="#enumerate" title="Permalink to this headline">#</a></h2>
 <p>It should be clear from the above examples that when iterating over a list using <code class="docutils literal notranslate"><span class="pre">for</span></code>, we get back a variable that changes at each iteration. This is usually fine, but sometimes, we want to know the <strong>actual position</strong> of the element and do something with that.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">enumerate</span></code> function is used for dealing with this. We call <code class="docutils literal notranslate"><span class="pre">enumerate</span></code> on a sequence when we set up a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, and it returns a pair of variables - a counter, that returns the index, and a value, that returns the element, just like a normal <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
 <p>The syntax looks like this!</p>
@@ -864,7 +597,7 @@ value
 </div>
 </section>
 <section id="iterating-over-dictionaries">
-<h2><span class="section-number">4.3. </span>Iterating over dictionaries<a class="headerlink" href="#iterating-over-dictionaries" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.3. </span>Iterating over dictionaries<a class="headerlink" href="#iterating-over-dictionaries" title="Permalink to this headline">#</a></h2>
 <p>Dictionaries are a somewhat more complex structure compared to lists. For example, they don’t ‘remember’ the order things were put in them, depending on the version of Python you use, so iterating over them in the same way as lists doesn’t always make sense.</p>
 <p>If we remember the <strong>methods</strong> dictionaries had, we can iterate over those to access and play around with created dictionaries.</p>
 <div class="cell docutils container">
@@ -1010,17 +743,17 @@ The key Score_C returns the value: 88.9873
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="data_collections.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="functions.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2. </span>Data collections</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>Functions</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../chapter2/data_handling_numpy.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Data Handling with Python</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Data Handling with Python</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
