@@ -1,0 +1,1279 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4. Hierarchical or mixed models &#8212; An introduction to data analysis in Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. Bonus section - Its Just A Linear Model" href="ijalm.html" />
+    <link rel="prev" title="3. Generalised Linear Models" href="generalised.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">An introduction to data analysis in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    An introduction to data analysis in Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  The Basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/the_basics.html">
+   1. The Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/data_collections.html">
+   2. Data collections
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/functions.html">
+   3. Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/loops.html">
+   4. Loops
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  NumPy
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter2/imports.html">
+   1. Starting data handling in Python - NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter2/basic_numpy.html">
+   2. The
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     numpy
+    </span>
+   </code>
+   module
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter2/stats_simulation.html">
+   3. Data indexing, simulation, and summary statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  pandas
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/pandas_import_describe.html">
+   1. The
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pandas
+    </span>
+   </code>
+   module
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/indexing.html">
+   2. Accessing data in Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/booleans.html">
+   3. Boolean operations with Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/split_apply_combine.html">
+   4. The power of
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     groupby
+    </span>
+   </code>
+   and aggregation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/custom_functions_flow.html">
+   5. Custom functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  pandas - advanced uses
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/apply.html">
+   1. Advanced data handling with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pandas
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/go_long.html">
+   2. Data surgery - reshaping data with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     melt
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/go_wide.html">
+   3. There and back again - reshaping data with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .pivot_table()
+    </span>
+   </code>
+   .
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/merge_join.html">
+   4. Data surgery - joining DataFrames with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pd.concat
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pd.merge
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data Visualisation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter5/matplotlib.html">
+   1. Introducing
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     matplotlib
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter5/seaborn.html">
+   2. Using
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     seaborn
+    </span>
+   </code>
+   for smoother data visualisation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter5/advanced_seaborn.html">
+   3. Advanced plotting with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     seaborn
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Statistical Analysis
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pingouin.html">
+   1. (Frequentist) Statistics in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="statsmodels.html">
+   2. Statistics with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     statsmodels
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     scipy.stats
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="generalised.html">
+   3. Generalised Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4. Hierarchical or mixed models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ijalm.html">
+   5.
+   <strong>
+    Bonus section
+   </strong>
+   -
+   <strong>
+    I
+   </strong>
+   ts
+   <strong>
+    J
+   </strong>
+   ust
+   <strong>
+    A
+   </strong>
+   <strong>
+    L
+   </strong>
+   inear
+   <strong>
+    M
+   </strong>
+   odel
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/chapter6/lmm.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter6/lmm.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/chapter6/lmm.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-hierarchical-models-with-statsmodels-random-intercepts-and-slopes">
+   4.1. Fitting hierarchical models with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     statsmodels
+    </span>
+   </code>
+   - random intercepts and slopes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-intercepts-only">
+     4.1.1. Random intercepts only
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-slopes-only">
+     4.1.2. Random slopes only
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#putting-it-all-together">
+   4.2. Putting it all together
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-mixed-models-and-notes">
+   4.3. Further mixed models and notes
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Hierarchical or mixed models</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-hierarchical-models-with-statsmodels-random-intercepts-and-slopes">
+   4.1. Fitting hierarchical models with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     statsmodels
+    </span>
+   </code>
+   - random intercepts and slopes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-intercepts-only">
+     4.1.1. Random intercepts only
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-slopes-only">
+     4.1.2. Random slopes only
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#putting-it-all-together">
+   4.2. Putting it all together
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-mixed-models-and-notes">
+   4.3. Further mixed models and notes
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="hierarchical-or-mixed-models">
+<h1><span class="section-number">4. </span>Hierarchical or mixed models<a class="headerlink" href="#hierarchical-or-mixed-models" title="Permalink to this headline">#</a></h1>
+<p>Hierload_datamodels - sometimes known as mixed models, multilevel models, or random effects models, are experiencing massive adoption in psychology. Hierarchical models are suitable for datasets with, well, a hierarchy. The classic example is predicting exam scores for individual school students in different classrooms, in different schools, in different counties, or for modelling repeated-measures data, such as many participants giving many responses to different stimuli.</p>
+<p>At their core, hierarchical models take care of the key independent-and-identically-distributed - <strong>i.i.d</strong> that has been implicitly present in every analysis or regression model covered so far. Simply, this assumption states that each observed datapoint should be independent from the others, and distributed in the same way (i.e., perhaps coming from a normal distribution, a Poisson, etc). In repeated measures data, this is obviously violated - some responses come from one participant, some from another, and so on. In the school example, students in a classroom are probably more similar than those in another, and perhaps schools in some counties are more similar overall than others. Indeed, the longer you think on this, the more likely it is you will <em>start seeing hierarchies everywhere</em>. The fundamental i.i.d asusmption is pervasive, and not often met. Psychologists have typically dodged this bullet by averaging data across stimuli or participants, and analysing the subsequent average scores. But these data do not represent the actual data collected or the data-generating process!</p>
+<p>Hierarchical models incorporate specific effects, sometimes called random effects, that are unique to each “group” in the data. For example, in a repeated measures study, a single participant would have their own unique effect ‘tagged’ onto the predictions of their score, to account for the fact those scores come from the same person.</p>
+<p>These ‘random effects’ take basically two forms. The most common is known as a <strong>random intercept</strong>. In this type of model, each grouping variable is given its own intercept value in regression (most typically an ‘offset’ from a global intercept), that denotes how the predictions of the data points from that group should be shifted up or down.</p>
+<p>The second form is that of a <strong>random slope</strong>. This works in exactly the same way, but for a coefficient/predictor variable - imagine that school students are given a teaching intervention that involves some extra one-to-one tuition, measured in minutes. Students receive varying amounts of tuition minutes depending on their availability - some get more, some less. A random slope would mean that students within different classrooms could have a specific coefficient value that deviates from the global effect of tuition minutes.</p>
+<p>In practice, both random slopes and random intercepts are combined in models.</p>
+<section id="fitting-hierarchical-models-with-statsmodels-random-intercepts-and-slopes">
+<h2><span class="section-number">4.1. </span>Fitting hierarchical models with <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> - random intercepts and slopes<a class="headerlink" href="#fitting-hierarchical-models-with-statsmodels-random-intercepts-and-slopes" title="Permalink to this headline">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">mixedlm</span></code> function will estimate a hiearchical model for us. Note that this function is back in the realm of normal, linear regression - no more generalized linear madness now! To highlight the flexibility of these models, we will use the <code class="docutils literal notranslate"><span class="pre">sleepstudy</span></code> dataset, which is ideally suited to highlight random effects. The data contains reaction times on a series of tasks while they are sleep deprived (three hours per night) over the course of 10 days. The first two days are baseline and adaptation.</p>
+<p>First, we read it in:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read sleep data</span>
+<span class="n">sleep</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://figshare.com/ndownloader/files/31181002&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Reaction</th>
+      <th>Days</th>
+      <th>Subject</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>249.5600</td>
+      <td>0</td>
+      <td>308</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>258.7047</td>
+      <td>1</td>
+      <td>308</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>250.8006</td>
+      <td>2</td>
+      <td>308</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>321.4398</td>
+      <td>3</td>
+      <td>308</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>356.8519</td>
+      <td>4</td>
+      <td>308</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>175</th>
+      <td>329.6076</td>
+      <td>5</td>
+      <td>372</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>334.4818</td>
+      <td>6</td>
+      <td>372</td>
+    </tr>
+    <tr>
+      <th>177</th>
+      <td>343.2199</td>
+      <td>7</td>
+      <td>372</td>
+    </tr>
+    <tr>
+      <th>178</th>
+      <td>369.1417</td>
+      <td>8</td>
+      <td>372</td>
+    </tr>
+    <tr>
+      <th>179</th>
+      <td>364.1236</td>
+      <td>9</td>
+      <td>372</td>
+    </tr>
+  </tbody>
+</table>
+<p>180 rows × 3 columns</p>
+</div></div></div>
+</div>
+<p>We can plot the reactions time over each day, for each of the participants:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot</span>
+<span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">plotting_context</span><span class="p">(</span><span class="s1">&#39;talk&#39;</span><span class="p">):</span>
+    
+    <span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">sleep</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Days&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Reaction&#39;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;Subject&#39;</span><span class="p">,</span> 
+                <span class="n">col_wrap</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;point&#39;</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lmm_6_0.png" src="../_images/lmm_6_0.png" />
+</div>
+</div>
+<p>There is a lot of variation here. Each subject has a different pattern! For example subject 309 is really consistent but subject 337 trends upwards (slowing their reaction time) across the study. With this dataset, we can show off the mixed-model capabilities of <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>.</p>
+<p>We want to:</p>
+<ul class="simple">
+<li><p>Always predict the reaction time from days of sleep deprivation</p></li>
+</ul>
+<ol class="simple">
+<li><p>Allow the model to vary the intercept (start-point) for each subject</p></li>
+<li><p>Allow the model to vary the coefficient of day for each subject (effect of days of deprivation)</p></li>
+<li><p>Allow the model to do both</p></li>
+</ol>
+<section id="random-intercepts-only">
+<h3><span class="section-number">4.1.1. </span>Random intercepts only<a class="headerlink" href="#random-intercepts-only" title="Permalink to this headline">#</a></h3>
+<p>Lets get started. Below we show how part 1. The <code class="docutils literal notranslate"><span class="pre">mixedlm</span></code> function accepts a formula as usual, but has an additional argument, <code class="docutils literal notranslate"><span class="pre">groups</span></code>, that allows us to specify the grouping data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First use of mixedlm, a random-intercepts only model</span>
+<span class="n">random_intercepts</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">mixedlm</span><span class="p">(</span><span class="s1">&#39;Reaction ~ Days&#39;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="s1">&#39;Subject&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">sleep</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Summary</span>
+<span class="n">random_intercepts</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+       <td>Model:</td>       <td>MixedLM</td> <td>Dependent Variable:</td> <td>Reaction</td> 
+</tr>
+<tr>
+  <td>No. Observations:</td>   <td>180</td>         <td>Method:</td>         <td>REML</td>   
+</tr>
+<tr>
+     <td>No. Groups:</td>      <td>18</td>          <td>Scale:</td>        <td>960.4568</td> 
+</tr>
+<tr>
+  <td>Min. group size:</td>    <td>10</td>      <td>Log-Likelihood:</td>   <td>-893.2325</td>
+</tr>
+<tr>
+  <td>Max. group size:</td>    <td>10</td>        <td>Converged:</td>         <td>Yes</td>   
+</tr>
+<tr>
+  <td>Mean group size:</td>   <td>10.0</td>            <td></td>               <td></td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>         <th>Coef.</th>  <th>Std.Err.</th>    <th>z</th>   <th>P>|z|</th> <th>[0.025</th>  <th>0.975]</th> 
+</tr>
+<tr>
+  <th>Intercept</th>    <td>251.405</td>   <td>9.747</td>  <td>25.794</td> <td>0.000</td> <td>232.302</td> <td>270.508</td>
+</tr>
+<tr>
+  <th>Days</th>         <td>10.467</td>    <td>0.804</td>  <td>13.015</td> <td>0.000</td>  <td>8.891</td>  <td>12.044</td> 
+</tr>
+<tr>
+  <th>Subject Var</th> <td>1378.176</td>  <td>17.156</td>     <td></td>      <td></td>       <td></td>        <td></td>    
+</tr>
+</table></div></div>
+</div>
+<p>Interesting! The model shows us the number of groups (18), which is equal to the number of participants. It shows the group size is 10 - the number of observations provided by each participant. The <code class="docutils literal notranslate"><span class="pre">Intercept</span></code> and <code class="docutils literal notranslate"><span class="pre">Days</span></code> data have their usual interpretation - the intercept is the average reaction time when day is zero (so the start point) and Days is the increase in reaction time as each day goes by, so an additional 10.467 ms are added per day.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Subject</span> <span class="pre">Var</span></code> coefficient represents the variability in reaction time due to the different subjects. We can divide that by the total variability if we wish to get a kind of ‘variance explained’:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute variance explained</span>
+<span class="n">random_intercepts</span><span class="o">.</span><span class="n">cov_re</span> <span class="o">/</span> <span class="n">sleep</span><span class="p">[</span><span class="s1">&#39;Reaction&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Subject</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Subject</th>
+      <td>0.434354</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We’ve allowed each participant here their own intercept. Where are they? We can access that using the <code class="docutils literal notranslate"><span class="pre">.random_effects</span></code> attribute. As can be seen, this returns a dictionary with keys as the individual participant identifiers, and a value which represents the random effect - actually each participants <em>offset</em> from the global intercept. We’d like this as a DataFrame, so first we extract it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract offsets to df using the .from_dict method in the constructor</span>
+<span class="n">intercepts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">random_intercepts</span><span class="o">.</span><span class="n">random_effects</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To see each participants individual intercept, we simply add the <strong>global intercept</strong> of the model! We can grab this from the <code class="docutils literal notranslate"><span class="pre">.fe_params</span></code> attribute of the fitted model (<code class="docutils literal notranslate"><span class="pre">fe</span></code> being ‘fixed effect’, i.e., not random)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add the global intercept</span>
+<span class="n">intercepts</span> <span class="o">=</span> <span class="n">intercepts</span> <span class="o">+</span> <span class="n">random_intercepts</span><span class="o">.</span><span class="n">fe_params</span><span class="p">[</span><span class="s1">&#39;Intercept&#39;</span><span class="p">]</span>
+<span class="n">intercepts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Subject</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>308</th>
+      <td>292.188809</td>
+    </tr>
+    <tr>
+      <th>309</th>
+      <td>173.555562</td>
+    </tr>
+    <tr>
+      <th>310</th>
+      <td>188.296546</td>
+    </tr>
+    <tr>
+      <th>330</th>
+      <td>255.811546</td>
+    </tr>
+    <tr>
+      <th>331</th>
+      <td>261.621293</td>
+    </tr>
+    <tr>
+      <th>332</th>
+      <td>259.626342</td>
+    </tr>
+    <tr>
+      <th>333</th>
+      <td>267.905597</td>
+    </tr>
+    <tr>
+      <th>334</th>
+      <td>248.408124</td>
+    </tr>
+    <tr>
+      <th>335</th>
+      <td>206.122984</td>
+    </tr>
+    <tr>
+      <th>337</th>
+      <td>323.587781</td>
+    </tr>
+    <tr>
+      <th>349</th>
+      <td>230.208859</td>
+    </tr>
+    <tr>
+      <th>350</th>
+      <td>265.516466</td>
+    </tr>
+    <tr>
+      <th>351</th>
+      <td>243.542885</td>
+    </tr>
+    <tr>
+      <th>352</th>
+      <td>287.783525</td>
+    </tr>
+    <tr>
+      <th>369</th>
+      <td>258.441485</td>
+    </tr>
+    <tr>
+      <th>370</th>
+      <td>245.042403</td>
+    </tr>
+    <tr>
+      <th>371</th>
+      <td>248.110832</td>
+    </tr>
+    <tr>
+      <th>372</th>
+      <td>269.520849</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Each participants baseline reaction time is estimated. Let’s next examine the actual predictions of this model, which allows us to account for each participants baseline. First, we insert the <code class="docutils literal notranslate"><span class="pre">.fittedvalues</span></code> into the sleep data.</p>
+<p>Second, we have to do some <em>slightly</em> more complex graph action to show these results. We utilise the <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> class <code class="docutils literal notranslate"><span class="pre">FacetGrid</span></code>, which allows us to split a dataset up by a grouping factor and map a specfic plotting function to each subgroup. First we plot the raw data, and then the estimated regression line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Insert</span>
+<span class="n">sleep</span><span class="p">[</span><span class="s1">&#39;predicted_random_intercept&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">random_intercepts</span><span class="o">.</span><span class="n">fittedvalues</span>
+
+<span class="c1"># Now plot using FacetGrid</span>
+<span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">plotting_context</span><span class="p">(</span><span class="s1">&#39;poster&#39;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    
+    <span class="p">(</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">sleep</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;Subject&#39;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">map_dataframe</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Days&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Reaction&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.3</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">map_dataframe</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Days&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;predicted_random_intercept&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lmm_16_0.png" src="../_images/lmm_16_0.png" />
+</div>
+</div>
+<p>Kind of amazing. It is evident that the random intercepts are true to their name - each participants estimated regression line starts at a different point, but the slope is absolutely identical across the participants, and sometimes with disastrous predictions (eg subject 335).</p>
+</section>
+<section id="random-slopes-only">
+<h3><span class="section-number">4.1.2. </span>Random slopes only<a class="headerlink" href="#random-slopes-only" title="Permalink to this headline">#</a></h3>
+<p>How about if we allow the effect of day to vary using a random slope? We can now demonstrate how to add this in (and keep the intercepts totally fixed!). We need to add an additional dictionary to the model specification under the keyword <code class="docutils literal notranslate"><span class="pre">vc</span></code>, which stands for variance components. The <code class="docutils literal notranslate"><span class="pre">'0</span> <span class="pre">+</span> <span class="pre">Days'</span></code> description indicates to the model to remove the participant-specific intercept, and estimate only a random effect for the Days coefficient.</p>
+<p>We estimate the model, store the predictions, and plot the data. Its also entirely possible to extract the random slopes themselves, and add the fixed effect of day to them, if required. The process is the same.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Estimate a random slope only regression</span>
+<span class="n">random_slopes</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">mixedlm</span><span class="p">(</span><span class="s1">&#39;Reaction ~ Days&#39;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="s1">&#39;Subject&#39;</span><span class="p">,</span>
+                            <span class="n">vc_formula</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Days&#39;</span><span class="p">:</span> <span class="s1">&#39;0 + Days&#39;</span><span class="p">},</span>
+                            <span class="n">data</span><span class="o">=</span><span class="n">sleep</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">random_slopes</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+       <td>Model:</td>       <td>MixedLM</td> <td>Dependent Variable:</td> <td>Reaction</td> 
+</tr>
+<tr>
+  <td>No. Observations:</td>   <td>180</td>         <td>Method:</td>         <td>REML</td>   
+</tr>
+<tr>
+     <td>No. Groups:</td>      <td>18</td>          <td>Scale:</td>        <td>842.0310</td> 
+</tr>
+<tr>
+  <td>Min. group size:</td>    <td>10</td>      <td>Log-Likelihood:</td>   <td>-883.2625</td>
+</tr>
+<tr>
+  <td>Max. group size:</td>    <td>10</td>        <td>Converged:</td>         <td>Yes</td>   
+</tr>
+<tr>
+  <td>Mean group size:</td>   <td>10.0</td>            <td></td>               <td></td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>       <th>Coef.</th>  <th>Std.Err.</th>    <th>z</th>   <th>P>|z|</th> <th>[0.025</th>  <th>0.975]</th> 
+</tr>
+<tr>
+  <th>Intercept</th> <td>251.405</td>   <td>4.020</td>  <td>62.539</td> <td>0.000</td> <td>243.526</td> <td>259.284</td>
+</tr>
+<tr>
+  <th>Days</th>      <td>10.467</td>    <td>1.870</td>   <td>5.599</td> <td>0.000</td>  <td>6.803</td>  <td>14.132</td> 
+</tr>
+<tr>
+  <th>Days Var</th>  <td>52.707</td>    <td>0.692</td>     <td></td>      <td></td>       <td></td>        <td></td>    
+</tr>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Insert</span>
+<span class="n">sleep</span><span class="p">[</span><span class="s1">&#39;predicted_random_slope&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">random_slopes</span><span class="o">.</span><span class="n">fittedvalues</span>
+
+<span class="c1"># Plot once more with facet grid</span>
+<span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">plotting_context</span><span class="p">(</span><span class="s1">&#39;poster&#39;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    
+    <span class="p">(</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">sleep</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;Subject&#39;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">map_dataframe</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Days&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Reaction&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.3</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">map_dataframe</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Days&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;predicted_random_slope&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lmm_19_0.png" src="../_images/lmm_19_0.png" />
+</div>
+</div>
+<p>We are now in eessentially the opposite position. Its clear that each slope varies, but notice that it <em>starts in the same position</em> on the y-axis, because the intercept is fixed across all participants! For some participants, the fit is pretty good already - e.g. Subject 372; but for others it is poor, e.g 309.</p>
+</section>
+</section>
+<section id="putting-it-all-together">
+<h2><span class="section-number">4.2. </span>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">#</a></h2>
+<p>We are now in a position where we can essentially combine the two approaches. We can fit a model that has random intercepts <em>and</em> slopes, allowing the starting position and the slope of the line to be unique for each participant. Putting this together in <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> is very easy, and relies on the use of the <code class="docutils literal notranslate"><span class="pre">re_formula</span></code> keyword.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Estimate a random intercepts and slopes regression</span>
+<span class="n">random_all</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">mixedlm</span><span class="p">(</span><span class="s1">&#39;Reaction ~ Days&#39;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="s1">&#39;Subject&#39;</span><span class="p">,</span>
+                         <span class="n">re_formula</span><span class="o">=</span><span class="s1">&#39;Days&#39;</span><span class="p">,</span>
+                         <span class="n">data</span><span class="o">=</span><span class="n">sleep</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">random_all</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+       <td>Model:</td>       <td>MixedLM</td> <td>Dependent Variable:</td> <td>Reaction</td> 
+</tr>
+<tr>
+  <td>No. Observations:</td>   <td>180</td>         <td>Method:</td>         <td>REML</td>   
+</tr>
+<tr>
+     <td>No. Groups:</td>      <td>18</td>          <td>Scale:</td>        <td>654.9405</td> 
+</tr>
+<tr>
+  <td>Min. group size:</td>    <td>10</td>      <td>Log-Likelihood:</td>   <td>-871.8141</td>
+</tr>
+<tr>
+  <td>Max. group size:</td>    <td>10</td>        <td>Converged:</td>         <td>Yes</td>   
+</tr>
+<tr>
+  <td>Mean group size:</td>   <td>10.0</td>            <td></td>               <td></td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+           <td></td>           <th>Coef.</th>  <th>Std.Err.</th>    <th>z</th>   <th>P>|z|</th> <th>[0.025</th>  <th>0.975]</th> 
+</tr>
+<tr>
+  <th>Intercept</th>          <td>251.405</td>   <td>6.825</td>  <td>36.838</td> <td>0.000</td> <td>238.029</td> <td>264.781</td>
+</tr>
+<tr>
+  <th>Days</th>               <td>10.467</td>    <td>1.546</td>   <td>6.771</td> <td>0.000</td>  <td>7.438</td>  <td>13.497</td> 
+</tr>
+<tr>
+  <th>Subject Var</th>        <td>612.096</td>  <td>11.881</td>     <td></td>      <td></td>       <td></td>        <td></td>    
+</tr>
+<tr>
+  <th>Subject x Days Cov</th>  <td>9.605</td>    <td>1.821</td>     <td></td>      <td></td>       <td></td>        <td></td>    
+</tr>
+<tr>
+  <th>Days Var</th>           <td>35.072</td>    <td>0.610</td>     <td></td>      <td></td>       <td></td>        <td></td>    
+</tr>
+</table></div></div>
+</div>
+<p>The output now includes a variance estimate for each of the intercepts, slopes, and their interaction (Subject, Days, and Subject x Days respectively). Accordingly, the <code class="docutils literal notranslate"><span class="pre">.random_effects</span></code> dictionary will now contain two values per participant - the slope and intercept estimate.</p>
+<p>Finally, lets see the predictions for this, using the same logic as before.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Insert</span>
+<span class="n">sleep</span><span class="p">[</span><span class="s1">&#39;predicted_random_all&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">random_all</span><span class="o">.</span><span class="n">fittedvalues</span>
+
+<span class="c1"># Plot once more with facet grid</span>
+<span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">plotting_context</span><span class="p">(</span><span class="s1">&#39;poster&#39;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    
+    <span class="p">(</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">sleep</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;Subject&#39;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">map_dataframe</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Days&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Reaction&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.3</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">map_dataframe</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Days&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;predicted_random_all&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lmm_23_0.png" src="../_images/lmm_23_0.png" />
+</div>
+</div>
+<p>Perfect! Those random effects worked really well, allowing for the slope and intercept to vary for each participant.</p>
+<p>But how should one choose whether to use random intercepts, slopes, or both? There are many schools of thought on this with no dominant view. In psychology, a popular approach is the ‘keep it maximal’ one of <a class="reference external" href="https://talklab.psy.gla.ac.uk/KeepItMaximalR2.pdf">Barr et al, 2013</a>, which suggests that you should include all the random intercepts and slopes that your data allows for. Others claim this makes the models overly saturated, unidentifiable, and ultimately uninterpretable <a class="reference external" href="https://www.sfs.uni-tuebingen.de/~hbaayen/publications/BatesKlieglVasishthBaayenParsimoneousLMMs2015.pdf">Bates et al</a>. Ultimately, the price we pay for more complex models like the hierarchical ones seen here is that we must make more decisions, and that we must be able to defend these decisions.</p>
+</section>
+<section id="further-mixed-models-and-notes">
+<h2><span class="section-number">4.3. </span>Further mixed models and notes<a class="headerlink" href="#further-mixed-models-and-notes" title="Permalink to this headline">#</a></h2>
+<p>The model shown above is a hierarchical cousin of the standard OLS model. Its entirely possible to fit generalized hierarchical models for binary or count data, and <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> <a class="reference external" href="https://www.statsmodels.org/dev/mixed_glm.html?highlight=bayes#module-statsmodels.genmod.bayes_mixed_glm">can do that</a>, but computation of these complex models becomes tricky. Bayesian models can help here, but that is another story!</p>
+<p>Finally, there are often times with experimental data when it would be good to include multiple random intercepts and slopes - for example, participants rating stimuli for attractiveness, where both participants and stimuli have different baselines and intercepts. These are less straightforward to implement and rely on a good working knowledge of the <em>variance components</em> side of <code class="docutils literal notranslate"><span class="pre">mixedlm</span></code>. This is an unfortunate aspect of <code class="docutils literal notranslate"><span class="pre">mixedlm</span></code> in contrast to other languages and packages (e.g. the <code class="docutils literal notranslate"><span class="pre">lmer</span></code> library in <span class="math notranslate nohighlight">\(R\)</span>), but it does at least build significant knowledge when trying to work with complex data.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter6"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="generalised.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>Generalised Linear Models</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="ijalm.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5. </span><strong>Bonus section</strong> - <strong>I</strong>ts <strong>J</strong>ust <strong>A</strong> <strong>L</strong>inear <strong>M</strong>odel</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alex Jones, Ph.D<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

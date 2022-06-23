@@ -1,0 +1,1303 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>5. Custom functions &#8212; An introduction to data analysis in Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Advanced data handling with pandas" href="../chapter4/apply.html" />
+    <link rel="prev" title="4. The power of groupby and aggregation" href="split_apply_combine.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">An introduction to data analysis in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    An introduction to data analysis in Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  The Basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/the_basics.html">
+   1. The Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/data_collections.html">
+   2. Data collections
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/functions.html">
+   3. Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/loops.html">
+   4. Loops
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  NumPy
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter2/imports.html">
+   1. Starting data handling in Python - NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter2/basic_numpy.html">
+   2. The
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     numpy
+    </span>
+   </code>
+   module
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter2/stats_simulation.html">
+   3. Data indexing, simulation, and summary statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  pandas
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pandas_import_describe.html">
+   1. The
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pandas
+    </span>
+   </code>
+   module
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indexing.html">
+   2. Accessing data in Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="booleans.html">
+   3. Boolean operations with Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="split_apply_combine.html">
+   4. The power of
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     groupby
+    </span>
+   </code>
+   and aggregation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   5. Custom functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  pandas - advanced uses
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/apply.html">
+   1. Advanced data handling with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pandas
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/go_long.html">
+   2. Data surgery - reshaping data with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     melt
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/go_wide.html">
+   3. There and back again - reshaping data with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .pivot_table()
+    </span>
+   </code>
+   .
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/merge_join.html">
+   4. Data surgery - joining DataFrames with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pd.concat
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pd.merge
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data Visualisation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter5/matplotlib.html">
+   1. Introducing
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     matplotlib
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter5/seaborn.html">
+   2. Using
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     seaborn
+    </span>
+   </code>
+   for smoother data visualisation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter5/advanced_seaborn.html">
+   3. Advanced plotting with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     seaborn
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Statistical Analysis
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter6/pingouin.html">
+   1. (Frequentist) Statistics in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter6/statsmodels.html">
+   2. Statistics with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     statsmodels
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     scipy.stats
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter6/generalised.html">
+   3. Generalised Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter6/lmm.html">
+   4. Hierarchical or mixed models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter6/ijalm.html">
+   5.
+   <strong>
+    Bonus section
+   </strong>
+   -
+   <strong>
+    I
+   </strong>
+   ts
+   <strong>
+    J
+   </strong>
+   ust
+   <strong>
+    A
+   </strong>
+   <strong>
+    L
+   </strong>
+   inear
+   <strong>
+    M
+   </strong>
+   odel
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/chapter3/custom_functions_flow.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter3/custom_functions_flow.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/chapter3/custom_functions_flow.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#function-definition-breakdown">
+   5.1. Function definition breakdown
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lambda-functions">
+   5.2. Lambda functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flow-control-the-if-else-statement">
+   5.3. Flow control - the
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if-else
+    </span>
+   </code>
+   statement
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#close">
+     5.3.1. Close
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Custom functions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#function-definition-breakdown">
+   5.1. Function definition breakdown
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lambda-functions">
+   5.2. Lambda functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flow-control-the-if-else-statement">
+   5.3. Flow control - the
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if-else
+    </span>
+   </code>
+   statement
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#close">
+     5.3.1. Close
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="custom-functions">
+<h1><span class="section-number">5. </span>Custom functions<a class="headerlink" href="#custom-functions" title="Permalink to this headline">#</a></h1>
+<p>The last few sessions have seen you use an enormous range of different functions in different modules. These pieces of reusable code achieve a specific outcome - one that is repeated enough times that its worth writing a function for.</p>
+<p>Sometimes when analysing data, you will need to write your own functions. This is easily achievable in Python, using the special keyword <code class="docutils literal notranslate"><span class="pre">def</span></code>. Defining a function is like creating a blueprint - a set of commands that can be executed time and time again. Functions can be as simple or as complex as is needed (there is no limit) and so can be used to solve specific data problems you have.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A very simple function example that works with strings</span>
+<span class="k">def</span> <span class="nf">simple</span><span class="p">(</span><span class="n">input_string</span><span class="p">):</span>
+    
+    <span class="n">new_string</span> <span class="o">=</span> <span class="s1">&#39;HELLO &#39;</span> <span class="o">+</span> <span class="n">input_string</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">new_string</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="function-definition-breakdown">
+<h2><span class="section-number">5.1. </span>Function definition breakdown<a class="headerlink" href="#function-definition-breakdown" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>The function is defined with the <code class="docutils literal notranslate"><span class="pre">def</span></code> keyword.</p></li>
+<li><p>The name of the function follows immediately after.</p></li>
+<li><p>The <em>function inputs</em> are specified within parentheses, followed by the colon and indented text for the actual work the function does.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">return</span></code> keyword tells Python that the variable immediately following it will be the output of the function.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use case</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">simple</span><span class="p">(</span><span class="s1">&#39;there&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+<span class="c1"># The actual variable &#39;new_string&#39; does not exist - globals is a special function returning all defined variables in your Python session,</span>
+<span class="c1"># we are checking if &#39;new_string&#39; is in there!</span>
+<span class="s1">&#39;new_string&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HELLO THERE
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>Functions can take multiple arguments, allowing for more complex operations, and return more than one output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Square the first argument, divide the second</span>
+<span class="k">def</span> <span class="nf">square_divide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    
+    <span class="n">first</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">second</span> <span class="o">=</span> <span class="n">b</span><span class="o">/</span><span class="mi">2</span>
+    
+    <span class="k">return</span> <span class="n">first</span><span class="p">,</span> <span class="n">second</span>
+
+<span class="c1"># &#39;Unpack&#39; the outputs like this</span>
+<span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">square_divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100 10.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>The arguments seen so far are known as <em>positional</em>. Arguments take on the values that are inserted in the position they go in!</p>
+<p>There are also <em>keyword</em> arguments. You have already seen these in action. These are arguments that can take on a default value, or you can specify a parameter of interest:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add a keyword argument to the square_divide function to specify the factor</span>
+<span class="k">def</span> <span class="nf">square_divide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    
+    <span class="n">first</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="n">factor</span>
+    <span class="n">second</span> <span class="o">=</span> <span class="n">b</span><span class="o">/</span><span class="n">factor</span>
+    
+    <span class="k">return</span> <span class="n">first</span><span class="p">,</span> <span class="n">second</span>
+
+<span class="c1"># Default usage - what happens if you don&#39;t unpack</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">square_divide</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Run with a new scaling factor, specifying with a keyword argument</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">square_divide</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 5.0
+32 2.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="lambda-functions">
+<h2><span class="section-number">5.2. </span>Lambda functions<a class="headerlink" href="#lambda-functions" title="Permalink to this headline">#</a></h2>
+<p>Lambda functions are a special kind of function definition used in Python. They are used to define <em>simple</em> functions that you may not need to re-use, but are nonetheless required for specific instances. These are quite abstract tools but are very powerful, especially with DataFrames. Lambda functions can be defined with the <code class="docutils literal notranslate"><span class="pre">lambda</span></code> keyword, followed by the arguments and actual function work. An example should make things clearer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show use of lambda function - adds 5 to input</span>
+<span class="n">lamb</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">5</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">lamb</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice the different convention - everything is done on one line, and it returns only a single output. At this point, it does seem kind of useless…</p>
+<p>But consider the example below. The function <code class="docutils literal notranslate"><span class="pre">sorted</span></code> takes a list, and will sort it from low to high. This behaviour is its default. However, <code class="docutils literal notranslate"><span class="pre">sorted</span></code> also takes a <code class="docutils literal notranslate"><span class="pre">key</span></code> argument, that allows for a specific sorting key to be defined. How could we sort a nested list?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define messy list - ID&#39;s and scores are messed up</span>
+<span class="n">data_list</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="s1">&#39;003&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">111</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;002&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="s1">&#39;001&#39;</span><span class="p">]]</span>
+
+<span class="c1"># Run sorted with default</span>
+<span class="n">default_sort</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data_list</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">default_sort</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[2, 87, &#39;001&#39;], [4, 81, &#39;003&#39;], [111, 2, &#39;002&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now use a lambda function to specify a special key and sort by the string!</span>
+<span class="n">lambda_sort</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data_list</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">lambda_sort</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[2, 87, &#39;001&#39;], [111, 2, &#39;002&#39;], [4, 81, &#39;003&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>It may be easier to understand what’s going on by writing out the full function definition and using that as the sort key.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write out the function definition in full - clunky, but hopefully clarifies</span>
+<span class="k">def</span> <span class="nf">sort_key</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
+    
+    <span class="k">return</span> <span class="n">element</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Apply </span>
+<span class="n">func_sort</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data_list</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">sort_key</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">func_sort</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[2, 87, &#39;001&#39;], [111, 2, &#39;002&#39;], [4, 81, &#39;003&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each element of the original list is a nested list. The key function is applied to each of these nested lists, and these become <code class="docutils literal notranslate"><span class="pre">x</span></code> - the final element of <code class="docutils literal notranslate"><span class="pre">x</span></code> is extracted, and that is what the <code class="docutils literal notranslate"><span class="pre">sorted</span></code> function then uses to sort!</p>
+<p>Lambda and normal functions can also be used with DataFrames for powerful effects. Let’s <em>z-score</em> some data in a DataFrame using some functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;gender&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">),</span>
+                   <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> 
+                   <span class="s1">&#39;RT&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,))</span>
+                  <span class="p">})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gender</th>
+      <th>age</th>
+      <th>RT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Male</td>
+      <td>32.232929</td>
+      <td>1191</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Male</td>
+      <td>15.881194</td>
+      <td>1279</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Male</td>
+      <td>36.224948</td>
+      <td>1213</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Male</td>
+      <td>35.329489</td>
+      <td>1027</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Male</td>
+      <td>24.181331</td>
+      <td>1223</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a function that will take a column and z-score it - value minus mean, divided by SD</span>
+<span class="k">def</span> <span class="nf">zscorer</span><span class="p">(</span><span class="n">df_column</span><span class="p">):</span>
+    
+    <span class="c1"># Compute average and SD - because we will be passing a DataFrame column, can use its methods!</span>
+    <span class="n">avg</span> <span class="o">=</span> <span class="n">df_column</span><span class="o">.</span><span class="n">mean</span><span class="p">();</span> <span class="n">sd</span> <span class="o">=</span> <span class="n">df_column</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+    
+    <span class="c1"># Subtract mean from each element</span>
+    <span class="n">centred</span> <span class="o">=</span> <span class="n">df_column</span> <span class="o">-</span> <span class="n">avg</span>
+    
+    <span class="c1"># Divide each element by sd</span>
+    <span class="n">zscored</span> <span class="o">=</span> <span class="n">centred</span><span class="o">/</span><span class="n">sd</span>
+    
+    <span class="c1"># Return</span>
+    <span class="k">return</span> <span class="n">zscored</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our function can now be applied to the columns using the <code class="docutils literal notranslate"><span class="pre">.transform()</span></code> method. However, we <strong>have</strong> to stick to the columns with numeric data, or it will break - ‘male’ and ‘female’ cannot be operated on with the function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func_zscore_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;RT&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">zscorer</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">func_zscore_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>RT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.422730</td>
+      <td>0.704171</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-1.922851</td>
+      <td>1.070262</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.995367</td>
+      <td>0.795694</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.866917</td>
+      <td>0.021910</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.732235</td>
+      <td>0.837295</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.465849</td>
+      <td>0.225756</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>-0.023661</td>
+      <td>-0.747714</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.101846</td>
+      <td>-0.364982</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.439822</td>
+      <td>-1.005642</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1.635464</td>
+      <td>-0.535547</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>-0.473170</td>
+      <td>-0.148655</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>-1.793642</td>
+      <td>-2.665533</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.929546</td>
+      <td>0.637609</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>-0.575134</td>
+      <td>-0.028012</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>-0.336847</td>
+      <td>1.203386</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Alternatively, this could be done much more efficiently using a <code class="docutils literal notranslate"><span class="pre">lambda</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply the lambda</span>
+<span class="n">lamb_zscore_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;RT&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+
+<span class="c1"># Do you get the same output?</span>
+<span class="p">(</span><span class="n">lamb_zscore_data</span> <span class="o">==</span> <span class="n">func_zscore_data</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="flow-control-the-if-else-statement">
+<h2><span class="section-number">5.3. </span>Flow control - the <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statement<a class="headerlink" href="#flow-control-the-if-else-statement" title="Permalink to this headline">#</a></h2>
+<p>There is one more important set of keywords in Python you haven’t yet encountered, which is very powerful. The <code class="docutils literal notranslate"><span class="pre">if-else</span></code> statement allows our code to make decisions and do different actions depending on the nature of certain variables. This statement is very useful in functions, where different outputs can be returned.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Demonstrate if with a simple greeting - this is how auto-generated emails will work</span>
+<span class="n">surname</span> <span class="o">=</span> <span class="s1">&#39; Jones&#39;</span>
+<span class="n">sex</span> <span class="o">=</span> <span class="s1">&#39;male&#39;</span>
+
+<span class="k">if</span> <span class="n">sex</span> <span class="o">==</span> <span class="s1">&#39;female&#39;</span><span class="p">:</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;Miss&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;Mr&#39;</span>
+
+<span class="n">salutation</span> <span class="o">=</span> <span class="s1">&#39;Dear &#39;</span> <span class="o">+</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">surname</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">salutation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dear Mr Jones
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Another simple example</span>
+<span class="n">val</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="k">if</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Above 10&#39;</span><span class="p">)</span>
+
+<span class="c1"># Why no output?</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>An <code class="docutils literal notranslate"><span class="pre">if</span></code> statement checks the truth of a conditional statement, and carries out the specified code if the condition is true - ‘else’ it does the code specified in the ‘else’ statement. You don’t have to have an <code class="docutils literal notranslate"><span class="pre">else</span></code> statement.</p>
+<p><code class="docutils literal notranslate"><span class="pre">if</span></code> statements can have complexity added with an <code class="docutils literal notranslate"><span class="pre">elif</span></code> keyword, which means ‘else-if’ - allowing you to check for multiple conditions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Demonstrate elif</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">25</span>
+
+<span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">30</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In 30s&#39;</span><span class="p">)</span>
+    
+<span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">30</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In 20s&#39;</span><span class="p">)</span>
+    
+<span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In teens&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>In 20s
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another example with a list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PID&#39;</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">921</span><span class="p">]</span>
+
+<span class="c1"># Check if an item is in a list, then do something with it</span>
+<span class="k">if</span> <span class="s1">&#39;PID&#39;</span> <span class="ow">in</span> <span class="n">my_list</span><span class="p">:</span>
+    <span class="n">my_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;PID&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;List is clean&#39;</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[23, 921]
+</pre></div>
+</div>
+</div>
+</div>
+<p>These statements are very powerful in functions, where different outputs can be returned depending on the inputs. In an earlier example, we had to subset a DataFrame to z-score the data, because we knew the function we applied with <code class="docutils literal notranslate"><span class="pre">.transform()</span></code> would break on the column containing strings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Edit the function to cope with strings, by checking the dtype of the column!</span>
+<span class="c1"># Define a function that will take a column and z-score it - value minus mean, divided by SD</span>
+<span class="k">def</span> <span class="nf">zscorer_new</span><span class="p">(</span><span class="n">df_column</span><span class="p">):</span>
+    
+    <span class="c1"># If its an &#39;object&#39;, meaning has strings</span>
+    <span class="k">if</span> <span class="n">df_column</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;O&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">df_column</span> <span class="c1"># Give it back in place</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Compute average and SD - because we will be passing a DataFrame column, can use its methods!</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="n">df_column</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">sd</span> <span class="o">=</span> <span class="n">df_column</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+        <span class="c1"># Subtract mean from each element</span>
+        <span class="n">centred</span> <span class="o">=</span> <span class="n">df_column</span> <span class="o">-</span> <span class="n">avg</span>
+
+        <span class="c1"># Divide each element by sd</span>
+        <span class="n">zscored</span> <span class="o">=</span> <span class="n">centred</span><span class="o">/</span><span class="n">sd</span>
+    
+        <span class="c1"># Return</span>
+        <span class="k">return</span> <span class="n">zscored</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now transform the DataFrame; no need to subset it</span>
+<span class="n">full_zscore</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">zscorer_new</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">full_zscore</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gender</th>
+      <th>age</th>
+      <th>RT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Male</td>
+      <td>0.422730</td>
+      <td>0.704171</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Male</td>
+      <td>-1.922851</td>
+      <td>1.070262</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Male</td>
+      <td>0.995367</td>
+      <td>0.795694</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Male</td>
+      <td>0.866917</td>
+      <td>0.021910</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Male</td>
+      <td>-0.732235</td>
+      <td>0.837295</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="close">
+<h3><span class="section-number">5.3.1. </span>Close<a class="headerlink" href="#close" title="Permalink to this headline">#</a></h3>
+<p>There’s a lot to take in there once more, but hopefully you can now see the benefits of working with NumPy and Pandas to get the most of your data.</p>
+<p>Try the exercises, and don’t feel you have to know all of this in one go. Mastering the basics of arrays and the general split-apply-combine approach counts for a large proportion of data analysis.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="split_apply_combine.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4. </span>The power of <code class="docutils literal notranslate"><span class="pre">groupby</span></code> and aggregation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../chapter4/apply.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Advanced data handling with <code class="docutils literal notranslate"><span class="pre">pandas</span></code></p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alex Jones, Ph.D<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

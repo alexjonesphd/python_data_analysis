@@ -1,0 +1,2753 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>1. (Frequentist) Statistics in Python &#8212; An introduction to data analysis in Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. Statistics with statsmodels and scipy.stats" href="statsmodels.html" />
+    <link rel="prev" title="3. Advanced plotting with seaborn" href="../chapter5/advanced_seaborn.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">An introduction to data analysis in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    An introduction to data analysis in Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  The Basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/the_basics.html">
+   1. The Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/data_collections.html">
+   2. Data collections
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/functions.html">
+   3. Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/loops.html">
+   4. Loops
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  NumPy
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter2/imports.html">
+   1. Starting data handling in Python - NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter2/basic_numpy.html">
+   2. The
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     numpy
+    </span>
+   </code>
+   module
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter2/stats_simulation.html">
+   3. Data indexing, simulation, and summary statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  pandas
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/pandas_import_describe.html">
+   1. The
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pandas
+    </span>
+   </code>
+   module
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/indexing.html">
+   2. Accessing data in Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/booleans.html">
+   3. Boolean operations with Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/split_apply_combine.html">
+   4. The power of
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     groupby
+    </span>
+   </code>
+   and aggregation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/custom_functions_flow.html">
+   5. Custom functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  pandas - advanced uses
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/apply.html">
+   1. Advanced data handling with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pandas
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/go_long.html">
+   2. Data surgery - reshaping data with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     melt
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/go_wide.html">
+   3. There and back again - reshaping data with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .pivot_table()
+    </span>
+   </code>
+   .
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/merge_join.html">
+   4. Data surgery - joining DataFrames with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pd.concat
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pd.merge
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data Visualisation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter5/matplotlib.html">
+   1. Introducing
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     matplotlib
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter5/seaborn.html">
+   2. Using
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     seaborn
+    </span>
+   </code>
+   for smoother data visualisation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter5/advanced_seaborn.html">
+   3. Advanced plotting with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     seaborn
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Statistical Analysis
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. (Frequentist) Statistics in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="statsmodels.html">
+   2. Statistics with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     statsmodels
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     scipy.stats
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="generalised.html">
+   3. Generalised Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lmm.html">
+   4. Hierarchical or mixed models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ijalm.html">
+   5.
+   <strong>
+    Bonus section
+   </strong>
+   -
+   <strong>
+    I
+   </strong>
+   ts
+   <strong>
+    J
+   </strong>
+   ust
+   <strong>
+    A
+   </strong>
+   <strong>
+    L
+   </strong>
+   inear
+   <strong>
+    M
+   </strong>
+   odel
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/chapter6/pingouin.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter6/pingouin.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/chapter6/pingouin.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-t-test-in-python">
+   1.1. A
+   <em>
+    t
+   </em>
+   -test in Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-repeated-measures-t-test-in-python">
+   1.2. A repeated-measures
+   <em>
+    t
+   </em>
+   -test in Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#correlations-with-python">
+   1.3. Correlations with Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-way-anova">
+   1.4. One way ANOVA
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-way-anova">
+   1.5. Two way ANOVA
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#repeated-measures-designs-one-and-two-way-anovas">
+   1.6. Repeated measures designs - one and two way ANOVAs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mixed-anova">
+   1.7. Mixed ANOVA
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ancova">
+   1.8. ANCOVA
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#post-hoc-multiple-comparisons">
+   1.9. Post hoc multiple comparisons
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-regression">
+   1.10. Linear regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#power-analysis">
+   1.11. Power Analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reliability-and-beyond">
+   1.12. Reliability and beyond
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>(Frequentist) Statistics in Python</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-t-test-in-python">
+   1.1. A
+   <em>
+    t
+   </em>
+   -test in Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-repeated-measures-t-test-in-python">
+   1.2. A repeated-measures
+   <em>
+    t
+   </em>
+   -test in Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#correlations-with-python">
+   1.3. Correlations with Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-way-anova">
+   1.4. One way ANOVA
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-way-anova">
+   1.5. Two way ANOVA
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#repeated-measures-designs-one-and-two-way-anovas">
+   1.6. Repeated measures designs - one and two way ANOVAs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mixed-anova">
+   1.7. Mixed ANOVA
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ancova">
+   1.8. ANCOVA
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#post-hoc-multiple-comparisons">
+   1.9. Post hoc multiple comparisons
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-regression">
+   1.10. Linear regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#power-analysis">
+   1.11. Power Analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reliability-and-beyond">
+   1.12. Reliability and beyond
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="frequentist-statistics-in-python">
+<h1><span class="section-number">1. </span>(Frequentist) Statistics in Python<a class="headerlink" href="#frequentist-statistics-in-python" title="Permalink to this headline">#</a></h1>
+<p>So far, we’ve dealt with data processing, handling, and visualisation. These steps are sometimes done ‘behind the scenes’ for early career researchers, who may be presented with a final dataset and asked to run statistical tests. But this hides a wealth of decision making and understanding of data from you,. There is no substitute for working with data yourself - and once you’re done with that, its time to actually do some statistical inference.</p>
+<p>Python is fully capable of running a range of statistical analyses on data. It is missing perhaps some of the nuanced functionality in statistics that <code class="docutils literal notranslate"><span class="pre">R</span></code> has; but this is the price you pay for using the second-best language for everything.</p>
+<p>There are two ways of approaching statistics in Python, and the approach will dictated the kinds of packages that are used. But much like our experience of plotting, these two approaches can directly work with one another.</p>
+<p>The first approach (and the most low-level) is the use of the <code class="docutils literal notranslate"><span class="pre">scipy</span></code> and <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> packages, which provide a dizzying array of functionality for working statistically - they are very general, suited to statistics across many domains, so may be confusing for psychologists.</p>
+<p>We will start with another package that aims to make traditional frequentist statistical analysis straightforward, <code class="docutils literal notranslate"><span class="pre">pingouin</span></code>.</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">pingouin</span></code> does not come with Anaconda, so you will need to install it. If you are working in a Jupyter notebook, in a fresh cell, you can use a magic command to <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> it, like so</strong>:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">pingouin</span>
+</pre></div>
+</div>
+<p>Check out the documentation of the <a class="reference external" href="https://pingouin-stats.org/index.html"><code class="docutils literal notranslate"><span class="pre">pingouin</span></code> package</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import pingouin, pandas, and seaborn</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pingouin</span> <span class="k">as</span> <span class="nn">pg</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="a-t-test-in-python">
+<h2><span class="section-number">1.1. </span>A <em>t</em>-test in Python<a class="headerlink" href="#a-t-test-in-python" title="Permalink to this headline">#</a></h2>
+<p>The most basic kind of analysis we can run is a T-test comparing two groups of participants on a single dependent variable. We have used the <code class="docutils literal notranslate"><span class="pre">tips</span></code> dataset before for data visualisation, and observed some differences - but we have <strong>not</strong> tested whether those differences are statistically significant. <code class="docutils literal notranslate"><span class="pre">pingouin</span></code> contains functions that allow us to answer this question - <code class="docutils literal notranslate"><span class="pre">pg.ttest()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First load tips</span>
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;tips&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_bill</th>
+      <th>tip</th>
+      <th>sex</th>
+      <th>smoker</th>
+      <th>day</th>
+      <th>time</th>
+      <th>size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>16.99</td>
+      <td>1.01</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.34</td>
+      <td>1.66</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.01</td>
+      <td>3.50</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>23.68</td>
+      <td>3.31</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24.59</td>
+      <td>3.61</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Do male and female customers differ in the amount of tips they give? Conducting a <em>t</em>-test on this is straightforward. We just need to pass the scores of the first group as the first argument to the function, and the scores of the second group as the second.</p>
+<p>If we look at <code class="docutils literal notranslate"><span class="pre">tips</span></code> we can see our data requires subsetting for that to happen, as it is in long format.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Subset the data and store before passing, using loc</span>
+<span class="n">females</span> <span class="o">=</span> <span class="n">tips</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tips</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="s1">&#39;tip&#39;</span><span class="p">]</span>
+<span class="n">males</span> <span class="o">=</span> <span class="n">tips</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tips</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;tip&#39;</span><span class="p">]</span>
+
+<span class="c1"># Conduct t test</span>
+<span class="n">pg</span><span class="o">.</span><span class="n">ttest</span><span class="p">(</span><span class="n">females</span><span class="p">,</span> <span class="n">males</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>T</th>
+      <th>dof</th>
+      <th>alternative</th>
+      <th>p-val</th>
+      <th>CI95%</th>
+      <th>cohen-d</th>
+      <th>BF10</th>
+      <th>power</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>T-test</th>
+      <td>-1.489536</td>
+      <td>215.707021</td>
+      <td>two-sided</td>
+      <td>0.137807</td>
+      <td>[-0.6, 0.08]</td>
+      <td>0.185494</td>
+      <td>0.414</td>
+      <td>0.282179</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pingouin</span></code> returns output in a DataFrame, including the T value, the p-value, and degrees of freedom. It also reports an effect size with Cohen’s D, achieved power, and also a Bayes Factor assessing the strength of evidence for the alternative hypothesis - more than enough information about your statistical test for reporting! Here we see a non-significant effect, with lower power.</p>
+</section>
+<section id="a-repeated-measures-t-test-in-python">
+<h2><span class="section-number">1.2. </span>A repeated-measures <em>t</em>-test in Python<a class="headerlink" href="#a-repeated-measures-t-test-in-python" title="Permalink to this headline">#</a></h2>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">pg.ttest()</span></code> assumes an independent samples test. A repeated measures comparison is achieved by setting the keyword argument <code class="docutils literal notranslate"><span class="pre">paired</span></code> to True. As an example, we could ask whether for each meal, the cost of the meal was higher than the tip - you would hope that this is the case!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">ttest</span><span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s1">&#39;total_bill&#39;</span><span class="p">],</span> <span class="n">tips</span><span class="p">[</span><span class="s1">&#39;tip&#39;</span><span class="p">],</span> <span class="n">paired</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>T</th>
+      <th>dof</th>
+      <th>alternative</th>
+      <th>p-val</th>
+      <th>CI95%</th>
+      <th>cohen-d</th>
+      <th>BF10</th>
+      <th>power</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>T-test</th>
+      <td>32.646505</td>
+      <td>243</td>
+      <td>two-sided</td>
+      <td>8.020019e-91</td>
+      <td>[15.77, 17.8]</td>
+      <td>2.635205</td>
+      <td>1.222e+87</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>A very large difference, as you would expect.</p>
+</section>
+<section id="correlations-with-python">
+<h2><span class="section-number">1.3. </span>Correlations with Python<a class="headerlink" href="#correlations-with-python" title="Permalink to this headline">#</a></h2>
+<p>Computing a correlation between a pair of variable is very straightforward. Simply pass the two variables to the <code class="docutils literal notranslate"><span class="pre">pg.corr()</span></code> function. For example, is there a correlation between the total bill and the tip?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_results</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s1">&#39;total_bill&#39;</span><span class="p">],</span> <span class="n">tips</span><span class="p">[</span><span class="s1">&#39;tip&#39;</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">corr_results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>n</th>
+      <th>r</th>
+      <th>CI95%</th>
+      <th>p-val</th>
+      <th>BF10</th>
+      <th>power</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>pearson</th>
+      <td>244</td>
+      <td>0.675734</td>
+      <td>[0.6, 0.74]</td>
+      <td>6.692471e-34</td>
+      <td>4.952e+30</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The output provides a range of information again - the n (of which your degrees of freedom is equal to <em>n</em> - 2), the r value itself, a 95% confidence interval around it, the variance explained in r2 (achieved via squaring r), an adjusted r2 (adjusting for the numbers of predictors in the model), the p value, power, and again a Bayes Factor.</p>
+<p>Its also worth noting that <code class="docutils literal notranslate"><span class="pre">pingouin</span></code> supports partial correlations, repeated measures correlations, and has other convenience functions that make testing correlational hypotheses straightforward.</p>
+</section>
+<section id="one-way-anova">
+<h2><span class="section-number">1.4. </span>One way ANOVA<a class="headerlink" href="#one-way-anova" title="Permalink to this headline">#</a></h2>
+<p>Things get more complicated once we move past simple tests and correlations, but thankfully <code class="docutils literal notranslate"><span class="pre">pingouin</span></code> makes things simple. Remember that a one way ANOVA examines differences between 3 or more groups on a single dependent variable. This is implemented in the <code class="docutils literal notranslate"><span class="pre">pg.anova</span></code> function.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">tips</span></code> dataset, we can examine whether there are significant differences between in the amount of tips received across the four different days the study was conducted (Thursday - Sunday).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conduct a one way ANOVA</span>
+<span class="n">one_way</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">anova</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">dv</span><span class="o">=</span><span class="s1">&#39;tip&#39;</span><span class="p">,</span> <span class="n">between</span><span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">detailed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">one_way</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Source</th>
+      <th>SS</th>
+      <th>DF</th>
+      <th>MS</th>
+      <th>F</th>
+      <th>p-unc</th>
+      <th>np2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>day</td>
+      <td>9.525873</td>
+      <td>3</td>
+      <td>3.175291</td>
+      <td>1.672355</td>
+      <td>0.173589</td>
+      <td>0.020476</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Within</td>
+      <td>455.686604</td>
+      <td>240</td>
+      <td>1.898694</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>You specify the dataset, the dependent variable, and the between-measures (or grouping factor). The <code class="docutils literal notranslate"><span class="pre">detailed</span></code> keyword gives more information back. The output should look familiar from software like SPSS, including df, ms, F, p value, and an effect size of partial eta squared.</p>
+</section>
+<section id="two-way-anova">
+<h2><span class="section-number">1.5. </span>Two way ANOVA<a class="headerlink" href="#two-way-anova" title="Permalink to this headline">#</a></h2>
+<p>If we want to add an additional factor, that is straightforward - pass a list of columns to the <code class="docutils literal notranslate"><span class="pre">between</span></code> keyword.</p>
+<p>We can examine the amount of tips given as a consequence of the day, and the sex of the customer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conduct the two way ANOVA</span>
+<span class="n">two_way</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">anova</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">dv</span><span class="o">=</span><span class="s1">&#39;tip&#39;</span><span class="p">,</span> <span class="n">between</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">two_way</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Source</th>
+      <th>SS</th>
+      <th>DF</th>
+      <th>MS</th>
+      <th>F</th>
+      <th>p-unc</th>
+      <th>np2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>day</td>
+      <td>7.446900</td>
+      <td>3.0</td>
+      <td>2.482300</td>
+      <td>1.298061</td>
+      <td>0.275785</td>
+      <td>0.016233</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>sex</td>
+      <td>1.594561</td>
+      <td>1.0</td>
+      <td>1.594561</td>
+      <td>0.833839</td>
+      <td>0.362097</td>
+      <td>0.003521</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>day * sex</td>
+      <td>2.785891</td>
+      <td>3.0</td>
+      <td>0.928630</td>
+      <td>0.485606</td>
+      <td>0.692600</td>
+      <td>0.006135</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Residual</td>
+      <td>451.306151</td>
+      <td>236.0</td>
+      <td>1.912314</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="repeated-measures-designs-one-and-two-way-anovas">
+<h2><span class="section-number">1.6. </span>Repeated measures designs - one and two way ANOVAs<a class="headerlink" href="#repeated-measures-designs-one-and-two-way-anovas" title="Permalink to this headline">#</a></h2>
+<p>Handling repeated measures in an ANOVA context is dealt with by the, <code class="docutils literal notranslate"><span class="pre">pg.rm_anova</span></code> function.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">bugs</span></code> dataset, where participants rate how much they want to kill an insect based on how frightening and disgusting they perceive it to be, is a good example of fully repeated measures data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read in bugs from the OSF</span>
+<span class="n">bugs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://osf.io/mrhjn/download&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">bugs</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Subject</th>
+      <th>Gender</th>
+      <th>Region</th>
+      <th>Education</th>
+      <th>Lo D, Lo F</th>
+      <th>Lo D, Hi F</th>
+      <th>Hi D, Lo F</th>
+      <th>Hi D, Hi F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Female</td>
+      <td>North</td>
+      <td>some</td>
+      <td>6.0</td>
+      <td>6.0</td>
+      <td>9.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Female</td>
+      <td>North</td>
+      <td>advance</td>
+      <td>10.0</td>
+      <td>NaN</td>
+      <td>10.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Female</td>
+      <td>Europe</td>
+      <td>college</td>
+      <td>5.0</td>
+      <td>10.0</td>
+      <td>10.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Female</td>
+      <td>North</td>
+      <td>college</td>
+      <td>6.0</td>
+      <td>9.0</td>
+      <td>6.0</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Female</td>
+      <td>North</td>
+      <td>some</td>
+      <td>3.0</td>
+      <td>6.5</td>
+      <td>5.5</td>
+      <td>8.5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Unfortunately, the data is in the wrong format for analysis - remember that repeated measures data often needs to be put into the ‘long’ format for analysis. The first step is to represent the data correctly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Melt the data</span>
+<span class="n">bugs_long</span> <span class="o">=</span> <span class="n">bugs</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Subject&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender&#39;</span><span class="p">,</span> <span class="s1">&#39;Region&#39;</span><span class="p">,</span> <span class="s1">&#39;Education&#39;</span><span class="p">],</span>
+                      <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Lo D, Lo F&#39;</span><span class="p">,</span> <span class="s1">&#39;Lo D, Hi F&#39;</span><span class="p">,</span> <span class="s1">&#39;Hi D, Lo F&#39;</span><span class="p">,</span> <span class="s1">&#39;Hi D, Hi F&#39;</span><span class="p">],</span>
+                      <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;Condition&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;Rating&#39;</span><span class="p">)</span>
+
+<span class="c1"># Split the condition column into two, so as to have two variables</span>
+<span class="n">bugs_long</span><span class="p">[[</span><span class="s1">&#39;Disgust_Level&#39;</span><span class="p">,</span> <span class="s1">&#39;Fright_Level&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">bugs_long</span><span class="p">[</span><span class="s1">&#39;Condition&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)))</span>      
+
+<span class="c1"># Finally replace the text values</span>
+<span class="n">bugs_long</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;Disgust_Level&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Lo D&#39;</span><span class="p">:</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="s1">&#39;Hi D&#39;</span><span class="p">:</span> <span class="s1">&#39;High&#39;</span><span class="p">},</span> <span class="s1">&#39;Fright_Level&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Lo F&#39;</span><span class="p">:</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="s1">&#39;Hi F&#39;</span><span class="p">:</span> <span class="s1">&#39;High&#39;</span><span class="p">}},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">bugs_long</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">bugs_long</span><span class="o">.</span><span class="n">tail</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Subject</th>
+      <th>Gender</th>
+      <th>Region</th>
+      <th>Education</th>
+      <th>Condition</th>
+      <th>Rating</th>
+      <th>Disgust_Level</th>
+      <th>Fright_Level</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Female</td>
+      <td>North</td>
+      <td>some</td>
+      <td>Lo D, Lo F</td>
+      <td>6.0</td>
+      <td>Low</td>
+      <td>Low</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Female</td>
+      <td>North</td>
+      <td>advance</td>
+      <td>Lo D, Lo F</td>
+      <td>10.0</td>
+      <td>Low</td>
+      <td>Low</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Female</td>
+      <td>Europe</td>
+      <td>college</td>
+      <td>Lo D, Lo F</td>
+      <td>5.0</td>
+      <td>Low</td>
+      <td>Low</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Female</td>
+      <td>North</td>
+      <td>college</td>
+      <td>Lo D, Lo F</td>
+      <td>6.0</td>
+      <td>Low</td>
+      <td>Low</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Female</td>
+      <td>North</td>
+      <td>some</td>
+      <td>Lo D, Lo F</td>
+      <td>3.0</td>
+      <td>Low</td>
+      <td>Low</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Subject</th>
+      <th>Gender</th>
+      <th>Region</th>
+      <th>Education</th>
+      <th>Condition</th>
+      <th>Rating</th>
+      <th>Disgust_Level</th>
+      <th>Fright_Level</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>367</th>
+      <td>96</td>
+      <td>Male</td>
+      <td>North</td>
+      <td>high</td>
+      <td>Hi D, Hi F</td>
+      <td>10.0</td>
+      <td>High</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <th>368</th>
+      <td>97</td>
+      <td>Female</td>
+      <td>North</td>
+      <td>NaN</td>
+      <td>Hi D, Hi F</td>
+      <td>10.0</td>
+      <td>High</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <th>369</th>
+      <td>98</td>
+      <td>Female</td>
+      <td>North</td>
+      <td>some</td>
+      <td>Hi D, Hi F</td>
+      <td>10.0</td>
+      <td>High</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <th>370</th>
+      <td>99</td>
+      <td>Female</td>
+      <td>North</td>
+      <td>some</td>
+      <td>Hi D, Hi F</td>
+      <td>10.0</td>
+      <td>High</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <th>371</th>
+      <td>100</td>
+      <td>Female</td>
+      <td>Europe</td>
+      <td>some</td>
+      <td>Hi D, Hi F</td>
+      <td>3.0</td>
+      <td>High</td>
+      <td>High</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The first thing is to apply a simple one way repeated measures ANOVA examining differences between disgust level. Note that for a repeated measures ANOVA, a column denoting the participant number has to be specified.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rma</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">rm_anova</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">bugs_long</span><span class="p">,</span> <span class="n">dv</span><span class="o">=</span><span class="s1">&#39;Rating&#39;</span><span class="p">,</span> <span class="n">within</span><span class="o">=</span><span class="s1">&#39;Disgust_Level&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s1">&#39;Subject&#39;</span><span class="p">,</span> <span class="n">detailed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">rma</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Source</th>
+      <th>SS</th>
+      <th>DF</th>
+      <th>MS</th>
+      <th>F</th>
+      <th>p-unc</th>
+      <th>np2</th>
+      <th>eps</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Disgust_Level</td>
+      <td>27.485215</td>
+      <td>1</td>
+      <td>27.485215</td>
+      <td>12.043878</td>
+      <td>0.000793</td>
+      <td>0.115758</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Error</td>
+      <td>209.952285</td>
+      <td>92</td>
+      <td>2.282090</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>This produces some familiar output - numerator and denominator degrees of freedom, mean square, F, p values, effect sizes, and epsilon, and index of sphericity.</p>
+<p>Extending this to the two way case is straightforward - add in more levels to the <code class="docutils literal notranslate"><span class="pre">within</span></code> keyword.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rma2</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">rm_anova</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">bugs_long</span><span class="p">,</span> <span class="n">dv</span><span class="o">=</span><span class="s1">&#39;Rating&#39;</span><span class="p">,</span> <span class="n">within</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Disgust_Level&#39;</span><span class="p">,</span> <span class="s1">&#39;Fright_Level&#39;</span><span class="p">],</span> <span class="n">subject</span><span class="o">=</span><span class="s1">&#39;Subject&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">rma2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Source</th>
+      <th>SS</th>
+      <th>ddof1</th>
+      <th>ddof2</th>
+      <th>MS</th>
+      <th>F</th>
+      <th>p-unc</th>
+      <th>p-GG-corr</th>
+      <th>np2</th>
+      <th>eps</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Disgust_Level</td>
+      <td>48.752841</td>
+      <td>1</td>
+      <td>87</td>
+      <td>48.752841</td>
+      <td>12.175190</td>
+      <td>7.623808e-04</td>
+      <td>7.623808e-04</td>
+      <td>0.122764</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Fright_Level</td>
+      <td>177.556818</td>
+      <td>1</td>
+      <td>87</td>
+      <td>177.556818</td>
+      <td>41.629663</td>
+      <td>6.011447e-09</td>
+      <td>6.011447e-09</td>
+      <td>0.323640</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Disgust_Level * Fright_Level</td>
+      <td>6.545455</td>
+      <td>1</td>
+      <td>87</td>
+      <td>6.545455</td>
+      <td>2.152300</td>
+      <td>1.459622e-01</td>
+      <td>1.459622e-01</td>
+      <td>0.024142</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>This function is capable of removing data with missing values automatically, and provides a similar set of outcomes, including a p value corrected for violations of sphericity.</p>
+</section>
+<section id="mixed-anova">
+<h2><span class="section-number">1.7. </span>Mixed ANOVA<a class="headerlink" href="#mixed-anova" title="Permalink to this headline">#</a></h2>
+<p>Often, researchers will blend both repeated measures and between-groups variables. For example, how do depressions scores change between time one and time two (a repeated measure) and for people who have received a new drug compared to those who have received placebo (between measures). The <code class="docutils literal notranslate"><span class="pre">pg.mixed_anova()</span></code> function is capable of handling cases where a dataset contains a single repeated measures factor and a single between groups factor.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">exercise</span></code> dataset used to illustrate <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> plots in the last chapter has this property - individuals are on a low fat or no fat diet, and their pulse is measured after 5, 10, and 15 minutes of exericse. Are there significant differences or interactions in these variables on heart rate?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load dataset straight from the internet!</span>
+<span class="n">exercise</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/mwaskom/seaborn-data/master/exercise.csv&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">exercise</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>id</th>
+      <th>diet</th>
+      <th>pulse</th>
+      <th>time</th>
+      <th>kind</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1</td>
+      <td>low fat</td>
+      <td>85</td>
+      <td>1 min</td>
+      <td>rest</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>low fat</td>
+      <td>85</td>
+      <td>15 min</td>
+      <td>rest</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>1</td>
+      <td>low fat</td>
+      <td>88</td>
+      <td>30 min</td>
+      <td>rest</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>2</td>
+      <td>low fat</td>
+      <td>90</td>
+      <td>1 min</td>
+      <td>rest</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>2</td>
+      <td>low fat</td>
+      <td>92</td>
+      <td>15 min</td>
+      <td>rest</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Submit to mixed anova - remove_na keyword set to False here</span>
+<span class="n">mix</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">mixed_anova</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">exercise</span><span class="p">,</span> <span class="n">dv</span><span class="o">=</span><span class="s1">&#39;pulse&#39;</span><span class="p">,</span> <span class="n">within</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">between</span><span class="o">=</span><span class="s1">&#39;diet&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">mix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Source</th>
+      <th>SS</th>
+      <th>DF1</th>
+      <th>DF2</th>
+      <th>MS</th>
+      <th>F</th>
+      <th>p-unc</th>
+      <th>p-GG-corr</th>
+      <th>np2</th>
+      <th>eps</th>
+      <th>sphericity</th>
+      <th>W-spher</th>
+      <th>p-spher</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>diet</td>
+      <td>1261.877778</td>
+      <td>1</td>
+      <td>28</td>
+      <td>1261.877778</td>
+      <td>3.147101</td>
+      <td>0.086939</td>
+      <td>NaN</td>
+      <td>0.101040</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>time</td>
+      <td>2066.600000</td>
+      <td>2</td>
+      <td>56</td>
+      <td>1033.300000</td>
+      <td>11.807751</td>
+      <td>0.000053</td>
+      <td>0.000312</td>
+      <td>0.296619</td>
+      <td>0.746425</td>
+      <td>False</td>
+      <td>0.660281</td>
+      <td>0.002994</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Interaction</td>
+      <td>192.822222</td>
+      <td>2</td>
+      <td>56</td>
+      <td>96.411111</td>
+      <td>1.101711</td>
+      <td>0.339395</td>
+      <td>NaN</td>
+      <td>0.037857</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The results are a merger of the standard ANOVA and the repeated measures ANOVA, providing sphericity measures for the repeated measures factor.</p>
+</section>
+<section id="ancova">
+<h2><span class="section-number">1.8. </span>ANCOVA<a class="headerlink" href="#ancova" title="Permalink to this headline">#</a></h2>
+<p>The final ANOVA design worth discussing is the ANCOVA. The ANCOVA allows for the addition of a <em>covariate</em>, a continuous variable that the researcher wasnt to remove the variance of from the model before examining differences between the groups. This is handled by the <code class="docutils literal notranslate"><span class="pre">pg.ancova</span></code> function.</p>
+<p>Currently, the function supports only between group designs, and not repeated measures.</p>
+<p>As a simple example, we can compare whether males and females offer different tip amounts <em>after controlling for the total cost of the bill</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ANCOVA example</span>
+<span class="n">pg</span><span class="o">.</span><span class="n">ancova</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">dv</span><span class="o">=</span><span class="s1">&#39;tip&#39;</span><span class="p">,</span> <span class="n">between</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">covar</span><span class="o">=</span><span class="s1">&#39;total_bill&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Source</th>
+      <th>SS</th>
+      <th>DF</th>
+      <th>F</th>
+      <th>p-unc</th>
+      <th>np2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>sex</td>
+      <td>0.038803</td>
+      <td>1</td>
+      <td>0.036999</td>
+      <td>8.476290e-01</td>
+      <td>0.000153</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>total_bill</td>
+      <td>208.789002</td>
+      <td>1</td>
+      <td>199.082735</td>
+      <td>2.332173e-33</td>
+      <td>0.452376</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Residual</td>
+      <td>252.749941</td>
+      <td>241</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Additional covariates can be specified as a list.</p>
+</section>
+<section id="post-hoc-multiple-comparisons">
+<h2><span class="section-number">1.9. </span>Post hoc multiple comparisons<a class="headerlink" href="#post-hoc-multiple-comparisons" title="Permalink to this headline">#</a></h2>
+<p>Now you know how to do any kind of research design under the sun with ANOVA in Python, the next step is to explore the follow up tests. After all, while ANOVA tells you there are significant differences, it offers no information on what those are driven by.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pingouin</span></code> offers a range of follow up tests to explore your data, but the focus here is on <code class="docutils literal notranslate"><span class="pre">pg.pairwise_ttests</span></code>, which computes t-tests between all pairwise differences of each variable level in your data.</p>
+<p>Let’s take a look at a dataset with an interaction. In the <code class="docutils literal notranslate"><span class="pre">exercise</span></code> dataset, there is an interaction between <code class="docutils literal notranslate"><span class="pre">diet</span></code> and the <code class="docutils literal notranslate"><span class="pre">kind</span></code> of exercise:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Examine interaction in exercise</span>
+<span class="n">interaction</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">anova</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">exercise</span><span class="p">,</span> <span class="n">dv</span><span class="o">=</span><span class="s1">&#39;pulse&#39;</span><span class="p">,</span> <span class="n">between</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;kind&#39;</span><span class="p">,</span> <span class="s1">&#39;diet&#39;</span><span class="p">],</span> <span class="n">detailed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">interaction</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Source</th>
+      <th>SS</th>
+      <th>DF</th>
+      <th>MS</th>
+      <th>F</th>
+      <th>p-unc</th>
+      <th>np2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>kind</td>
+      <td>8326.066667</td>
+      <td>2</td>
+      <td>4163.033333</td>
+      <td>37.824471</td>
+      <td>1.935335e-12</td>
+      <td>0.473846</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>diet</td>
+      <td>1261.877778</td>
+      <td>1</td>
+      <td>1261.877778</td>
+      <td>11.465164</td>
+      <td>1.080516e-03</td>
+      <td>0.120098</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>kind * diet</td>
+      <td>815.755556</td>
+      <td>2</td>
+      <td>407.877778</td>
+      <td>3.705894</td>
+      <td>2.868384e-02</td>
+      <td>0.081081</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Residual</td>
+      <td>9245.200000</td>
+      <td>84</td>
+      <td>110.061905</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can see the interaction is significant. How to follow this up with <code class="docutils literal notranslate"><span class="pre">pingouin</span></code> and see what is causing it? We use <code class="docutils literal notranslate"><span class="pre">pg.pairwise_ttests</span></code> like so:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Follow up interaction using comparisons at all levels</span>
+<span class="n">comparisons</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">pairwise_ttests</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">exercise</span><span class="p">,</span> <span class="n">dv</span><span class="o">=</span><span class="s1">&#39;pulse&#39;</span><span class="p">,</span> <span class="n">between</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;kind&#39;</span><span class="p">,</span> <span class="s1">&#39;diet&#39;</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">comparisons</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Contrast</th>
+      <th>kind</th>
+      <th>A</th>
+      <th>B</th>
+      <th>Paired</th>
+      <th>Parametric</th>
+      <th>T</th>
+      <th>dof</th>
+      <th>alternative</th>
+      <th>p-unc</th>
+      <th>BF10</th>
+      <th>hedges</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>kind</td>
+      <td>-</td>
+      <td>rest</td>
+      <td>running</td>
+      <td>False</td>
+      <td>True</td>
+      <td>-6.561162</td>
+      <td>58.0</td>
+      <td>two-sided</td>
+      <td>1.593561e-08</td>
+      <td>5.95e+05</td>
+      <td>-1.672084</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>kind</td>
+      <td>-</td>
+      <td>rest</td>
+      <td>walking</td>
+      <td>False</td>
+      <td>True</td>
+      <td>-2.674622</td>
+      <td>58.0</td>
+      <td>two-sided</td>
+      <td>9.704606e-03</td>
+      <td>4.824</td>
+      <td>-0.681616</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>kind</td>
+      <td>-</td>
+      <td>running</td>
+      <td>walking</td>
+      <td>False</td>
+      <td>True</td>
+      <td>5.183378</td>
+      <td>58.0</td>
+      <td>two-sided</td>
+      <td>2.881236e-06</td>
+      <td>5136.555</td>
+      <td>1.320961</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>diet</td>
+      <td>-</td>
+      <td>low fat</td>
+      <td>no fat</td>
+      <td>False</td>
+      <td>True</td>
+      <td>-2.457504</td>
+      <td>88.0</td>
+      <td>two-sided</td>
+      <td>1.595161e-02</td>
+      <td>3.0</td>
+      <td>-0.513659</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>kind * diet</td>
+      <td>rest</td>
+      <td>low fat</td>
+      <td>no fat</td>
+      <td>False</td>
+      <td>True</td>
+      <td>-1.434339</td>
+      <td>28.0</td>
+      <td>two-sided</td>
+      <td>1.625505e-01</td>
+      <td>0.742</td>
+      <td>-0.509591</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>kind * diet</td>
+      <td>running</td>
+      <td>low fat</td>
+      <td>no fat</td>
+      <td>False</td>
+      <td>True</td>
+      <td>-2.754828</td>
+      <td>28.0</td>
+      <td>two-sided</td>
+      <td>1.020405e-02</td>
+      <td>5.01</td>
+      <td>-0.978734</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>kind * diet</td>
+      <td>walking</td>
+      <td>low fat</td>
+      <td>no fat</td>
+      <td>False</td>
+      <td>True</td>
+      <td>-1.425097</td>
+      <td>28.0</td>
+      <td>two-sided</td>
+      <td>1.651816e-01</td>
+      <td>0.735</td>
+      <td>-0.506308</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can change the keyword arguments of <code class="docutils literal notranslate"><span class="pre">effsize</span></code> and <code class="docutils literal notranslate"><span class="pre">padjust</span></code> to control the returned effect sizes and type of adjustment done, respectively - sometimes you need to adjust your alpha level for lots of tests:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># More flexible use of function</span>
+<span class="n">pairs_bonf_cohen</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">pairwise_ttests</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">exercise</span><span class="p">,</span> <span class="n">dv</span><span class="o">=</span><span class="s1">&#39;pulse&#39;</span><span class="p">,</span> <span class="n">between</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;kind&#39;</span><span class="p">,</span> <span class="s1">&#39;diet&#39;</span><span class="p">],</span> 
+                                      <span class="n">padjust</span><span class="o">=</span><span class="s1">&#39;bonf&#39;</span><span class="p">,</span> <span class="n">effsize</span><span class="o">=</span><span class="s1">&#39;cohen&#39;</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">pairs_bonf_cohen</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Contrast</th>
+      <th>kind</th>
+      <th>A</th>
+      <th>B</th>
+      <th>Paired</th>
+      <th>Parametric</th>
+      <th>T</th>
+      <th>dof</th>
+      <th>alternative</th>
+      <th>p-unc</th>
+      <th>p-corr</th>
+      <th>p-adjust</th>
+      <th>BF10</th>
+      <th>cohen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>kind</td>
+      <td>-</td>
+      <td>rest</td>
+      <td>running</td>
+      <td>False</td>
+      <td>True</td>
+      <td>-6.561162</td>
+      <td>58.0</td>
+      <td>two-sided</td>
+      <td>1.593561e-08</td>
+      <td>4.780682e-08</td>
+      <td>bonf</td>
+      <td>5.95e+05</td>
+      <td>-1.694085</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>kind</td>
+      <td>-</td>
+      <td>rest</td>
+      <td>walking</td>
+      <td>False</td>
+      <td>True</td>
+      <td>-2.674622</td>
+      <td>58.0</td>
+      <td>two-sided</td>
+      <td>9.704606e-03</td>
+      <td>2.911382e-02</td>
+      <td>bonf</td>
+      <td>4.824</td>
+      <td>-0.690584</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>kind</td>
+      <td>-</td>
+      <td>running</td>
+      <td>walking</td>
+      <td>False</td>
+      <td>True</td>
+      <td>5.183378</td>
+      <td>58.0</td>
+      <td>two-sided</td>
+      <td>2.881236e-06</td>
+      <td>8.643708e-06</td>
+      <td>bonf</td>
+      <td>5136.555</td>
+      <td>1.338343</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>diet</td>
+      <td>-</td>
+      <td>low fat</td>
+      <td>no fat</td>
+      <td>False</td>
+      <td>True</td>
+      <td>-2.457504</td>
+      <td>88.0</td>
+      <td>two-sided</td>
+      <td>1.595161e-02</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>-0.518087</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>kind * diet</td>
+      <td>rest</td>
+      <td>low fat</td>
+      <td>no fat</td>
+      <td>False</td>
+      <td>True</td>
+      <td>-1.434339</td>
+      <td>28.0</td>
+      <td>two-sided</td>
+      <td>1.625505e-01</td>
+      <td>4.876516e-01</td>
+      <td>bonf</td>
+      <td>0.742</td>
+      <td>-0.523747</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>kind * diet</td>
+      <td>running</td>
+      <td>low fat</td>
+      <td>no fat</td>
+      <td>False</td>
+      <td>True</td>
+      <td>-2.754828</td>
+      <td>28.0</td>
+      <td>two-sided</td>
+      <td>1.020405e-02</td>
+      <td>3.061214e-02</td>
+      <td>bonf</td>
+      <td>5.01</td>
+      <td>-1.005921</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>kind * diet</td>
+      <td>walking</td>
+      <td>low fat</td>
+      <td>no fat</td>
+      <td>False</td>
+      <td>True</td>
+      <td>-1.425097</td>
+      <td>28.0</td>
+      <td>two-sided</td>
+      <td>1.651816e-01</td>
+      <td>4.955448e-01</td>
+      <td>bonf</td>
+      <td>0.735</td>
+      <td>-0.520372</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>There are lots of additional flexible ways the function works - it can handle the case of one way and two ANOVAs and mixed ANOVAs, just by specifying what variables should be <code class="docutils literal notranslate"><span class="pre">between</span></code> and <code class="docutils literal notranslate"><span class="pre">within</span></code>. Remember to choose the appropriate level of adjustment and effect size that suits your needs - but with this function, you can explore interactions in sufficient detail.</p>
+</section>
+<section id="linear-regression">
+<h2><span class="section-number">1.10. </span>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">#</a></h2>
+<p>The final statistical test that is common in psychology is linear regression, where a continuous outcome variable (such as age, or height) is predicted by other continuous variables (e.g. weight). Regression is among the most flexible of all analysis types - in fact, ANOVA is just a special case of regression.</p>
+<p>Linear regression is handled by the <code class="docutils literal notranslate"><span class="pre">pg.linear_regression()</span></code> function. It returns somewhat different output than the ANOVA function, containing information regarding the beta values of the regression (how much the dependent variable changes if the associated predictor increases by one unit), their p-values, and some information about the overall model fit.</p>
+<p>In the following example, we attempt to build a linear model to predict the amount of loss suffered by an insurance company in a given car crash, based on the insurance premium of the driver, their alcohol consumption, and their speed at the time of the crash. This data is stored in the <code class="docutils literal notranslate"><span class="pre">car_crashes</span></code> dataset of <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load dataset</span>
+<span class="n">crash</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;car_crashes&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">crash</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total</th>
+      <th>speeding</th>
+      <th>alcohol</th>
+      <th>not_distracted</th>
+      <th>no_previous</th>
+      <th>ins_premium</th>
+      <th>ins_losses</th>
+      <th>abbrev</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>18.8</td>
+      <td>7.332</td>
+      <td>5.640</td>
+      <td>18.048</td>
+      <td>15.040</td>
+      <td>784.55</td>
+      <td>145.08</td>
+      <td>AL</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>18.1</td>
+      <td>7.421</td>
+      <td>4.525</td>
+      <td>16.290</td>
+      <td>17.014</td>
+      <td>1053.48</td>
+      <td>133.93</td>
+      <td>AK</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>18.6</td>
+      <td>6.510</td>
+      <td>5.208</td>
+      <td>15.624</td>
+      <td>17.856</td>
+      <td>899.47</td>
+      <td>110.35</td>
+      <td>AZ</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>22.4</td>
+      <td>4.032</td>
+      <td>5.824</td>
+      <td>21.056</td>
+      <td>21.280</td>
+      <td>827.34</td>
+      <td>142.39</td>
+      <td>AR</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>12.0</td>
+      <td>4.200</td>
+      <td>3.360</td>
+      <td>10.920</td>
+      <td>10.680</td>
+      <td>878.41</td>
+      <td>165.63</td>
+      <td>CA</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform linear regression</span>
+<span class="n">lin_reg</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">linear_regression</span><span class="p">(</span><span class="n">crash</span><span class="p">[[</span><span class="s1">&#39;speeding&#39;</span><span class="p">,</span> <span class="s1">&#39;alcohol&#39;</span><span class="p">,</span> <span class="s1">&#39;ins_premium&#39;</span><span class="p">]],</span> <span class="n">crash</span><span class="p">[</span><span class="s1">&#39;ins_losses&#39;</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">lin_reg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>names</th>
+      <th>coef</th>
+      <th>se</th>
+      <th>T</th>
+      <th>pval</th>
+      <th>r2</th>
+      <th>adj_r2</th>
+      <th>CI[2.5%]</th>
+      <th>CI[97.5%]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Intercept</td>
+      <td>58.321239</td>
+      <td>17.891849</td>
+      <td>3.259654</td>
+      <td>0.002078</td>
+      <td>0.388636</td>
+      <td>0.349613</td>
+      <td>22.327480</td>
+      <td>94.314997</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>speeding</td>
+      <td>-0.297846</td>
+      <td>1.892755</td>
+      <td>-0.157361</td>
+      <td>0.875634</td>
+      <td>0.388636</td>
+      <td>0.349613</td>
+      <td>-4.105578</td>
+      <td>3.509885</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>alcohol</td>
+      <td>0.142754</td>
+      <td>2.234772</td>
+      <td>0.063878</td>
+      <td>0.949338</td>
+      <td>0.388636</td>
+      <td>0.349613</td>
+      <td>-4.353028</td>
+      <td>4.638535</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ins_premium</td>
+      <td>0.086772</td>
+      <td>0.016143</td>
+      <td>5.375042</td>
+      <td>0.000002</td>
+      <td>0.388636</td>
+      <td>0.349613</td>
+      <td>0.054295</td>
+      <td>0.119248</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Unlike SPSS, there is no overall model fit returned by <code class="docutils literal notranslate"><span class="pre">pingouin</span></code>. However, each predictor is returned with an associated coefficient and p value, and t value. The overall <span class="math notranslate nohighlight">\(R^2\)</span> of the model is also returned. By default the function will add an intercept to the model via the <code class="docutils literal notranslate"><span class="pre">add_intercept</span></code> keyword - if you centre your variables by subtracting the mean from each (easily achieved in Pandas!) then you should set that to False.</p>
+</section>
+<section id="power-analysis">
+<h2><span class="section-number">1.11. </span>Power Analysis<a class="headerlink" href="#power-analysis" title="Permalink to this headline">#</a></h2>
+<p>Power - the probability that a statistical test tell you there is a result when there <em>is indeed a result</em>, can be calculated in a closed-form way (i.e. without the use of simulations) for some basic tests. <code class="docutils literal notranslate"><span class="pre">pingouin</span></code> has some great functionality for this. For example, calculating the sample size needed for a correlation of .10, an alpha of .025, and power of .90, is easy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Correlation power</span>
+<span class="n">pg</span><span class="o">.</span><span class="n">power_corr</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="mf">.10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.025</span><span class="p">,</span> <span class="n">power</span><span class="o">=</span><span class="mf">.90</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1235.0573893376597
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ouch.</p>
+<p>There are a number of other power functions, as well as effect size estimator functions that can convert existing effect sizes (e.g. Cohen’s d) into others, or compute effect sizes from summary statistics in published papers (such as <em>t</em> or <em>F</em> values).</p>
+</section>
+<section id="reliability-and-beyond">
+<h2><span class="section-number">1.12. </span>Reliability and beyond<a class="headerlink" href="#reliability-and-beyond" title="Permalink to this headline">#</a></h2>
+<p>There is also the capability to estimate statistics of measurement reliability, such as the intra-class correlation or Cronbach’s alpha. Intraclass correlation is shown below, using the <code class="docutils literal notranslate"><span class="pre">wine</span></code> dataset from <code class="docutils literal notranslate"><span class="pre">pingouin</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read wine from pingouin</span>
+<span class="n">wine</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">read_dataset</span><span class="p">(</span><span class="s1">&#39;icc&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># Compute intra-class correlation within judges on their wine scores</span>
+<span class="n">pg</span><span class="o">.</span><span class="n">intraclass_corr</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">wine</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span><span class="s1">&#39;Wine&#39;</span><span class="p">,</span> 
+                   <span class="n">raters</span><span class="o">=</span><span class="s1">&#39;Judge&#39;</span><span class="p">,</span>
+                   <span class="n">ratings</span><span class="o">=</span><span class="s1">&#39;Scores&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Wine</th>
+      <th>Judge</th>
+      <th>Scores</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>A</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>A</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>A</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>A</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>A</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>ICC</th>
+      <th>F</th>
+      <th>df1</th>
+      <th>df2</th>
+      <th>pval</th>
+      <th>CI95%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ICC1</td>
+      <td>Single raters absolute</td>
+      <td>0.727521</td>
+      <td>11.680026</td>
+      <td>7</td>
+      <td>24</td>
+      <td>0.000002</td>
+      <td>[0.43, 0.93]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ICC2</td>
+      <td>Single random raters</td>
+      <td>0.727689</td>
+      <td>11.786693</td>
+      <td>7</td>
+      <td>21</td>
+      <td>0.000005</td>
+      <td>[0.43, 0.93]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ICC3</td>
+      <td>Single fixed raters</td>
+      <td>0.729487</td>
+      <td>11.786693</td>
+      <td>7</td>
+      <td>21</td>
+      <td>0.000005</td>
+      <td>[0.43, 0.93]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ICC1k</td>
+      <td>Average raters absolute</td>
+      <td>0.914384</td>
+      <td>11.680026</td>
+      <td>7</td>
+      <td>24</td>
+      <td>0.000002</td>
+      <td>[0.75, 0.98]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ICC2k</td>
+      <td>Average random raters</td>
+      <td>0.914450</td>
+      <td>11.786693</td>
+      <td>7</td>
+      <td>21</td>
+      <td>0.000005</td>
+      <td>[0.75, 0.98]</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ICC3k</td>
+      <td>Average fixed raters</td>
+      <td>0.915159</td>
+      <td>11.786693</td>
+      <td>7</td>
+      <td>21</td>
+      <td>0.000005</td>
+      <td>[0.75, 0.98]</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>In most cases, classical statistical techniques are handled exceptionally well in <code class="docutils literal notranslate"><span class="pre">pingouin</span></code>, and there is a huge range of functionality of more advanced tasks (power, repeated measures correlations, etc), and even statistical plotting functions. However, when things are limited, there are other options…</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter6"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../chapter5/advanced_seaborn.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>Advanced plotting with <code class="docutils literal notranslate"><span class="pre">seaborn</span></code></p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="statsmodels.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Statistics with <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> and <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code></p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alex Jones, Ph.D<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

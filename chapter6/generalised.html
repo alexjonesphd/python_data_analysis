@@ -1,0 +1,1792 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>3. Generalised Linear Models &#8212; An introduction to data analysis in Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Hierarchical or mixed models" href="lmm.html" />
+    <link rel="prev" title="2. Statistics with statsmodels and scipy.stats" href="statsmodels.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">An introduction to data analysis in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    An introduction to data analysis in Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  The Basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/the_basics.html">
+   1. The Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/data_collections.html">
+   2. Data collections
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/functions.html">
+   3. Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/loops.html">
+   4. Loops
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  NumPy
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter2/imports.html">
+   1. Starting data handling in Python - NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter2/basic_numpy.html">
+   2. The
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     numpy
+    </span>
+   </code>
+   module
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter2/stats_simulation.html">
+   3. Data indexing, simulation, and summary statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  pandas
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/pandas_import_describe.html">
+   1. The
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pandas
+    </span>
+   </code>
+   module
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/indexing.html">
+   2. Accessing data in Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/booleans.html">
+   3. Boolean operations with Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/split_apply_combine.html">
+   4. The power of
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     groupby
+    </span>
+   </code>
+   and aggregation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter3/custom_functions_flow.html">
+   5. Custom functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  pandas - advanced uses
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/apply.html">
+   1. Advanced data handling with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pandas
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/go_long.html">
+   2. Data surgery - reshaping data with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     melt
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/go_wide.html">
+   3. There and back again - reshaping data with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .pivot_table()
+    </span>
+   </code>
+   .
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter4/merge_join.html">
+   4. Data surgery - joining DataFrames with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pd.concat
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pd.merge
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data Visualisation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter5/matplotlib.html">
+   1. Introducing
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     matplotlib
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter5/seaborn.html">
+   2. Using
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     seaborn
+    </span>
+   </code>
+   for smoother data visualisation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter5/advanced_seaborn.html">
+   3. Advanced plotting with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     seaborn
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Statistical Analysis
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pingouin.html">
+   1. (Frequentist) Statistics in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="statsmodels.html">
+   2. Statistics with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     statsmodels
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     scipy.stats
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   3. Generalised Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lmm.html">
+   4. Hierarchical or mixed models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ijalm.html">
+   5.
+   <strong>
+    Bonus section
+   </strong>
+   -
+   <strong>
+    I
+   </strong>
+   ts
+   <strong>
+    J
+   </strong>
+   ust
+   <strong>
+    A
+   </strong>
+   <strong>
+    L
+   </strong>
+   inear
+   <strong>
+    M
+   </strong>
+   odel
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/chapter6/generalised.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter6/generalised.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/chapter6/generalised.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logistic-regression">
+   3.1. Logistic Regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#poisson-or-negative-binomial-models">
+   3.2. Poisson or Negative Binomial models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#poisson-regression">
+     3.2.1. Poisson Regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#negative-binomial-regression">
+     3.2.2. Negative Binomial Regression
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Generalised Linear Models</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logistic-regression">
+   3.1. Logistic Regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#poisson-or-negative-binomial-models">
+   3.2. Poisson or Negative Binomial models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#poisson-regression">
+     3.2.1. Poisson Regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#negative-binomial-regression">
+     3.2.2. Negative Binomial Regression
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="generalised-linear-models">
+<h1><span class="section-number">3. </span>Generalised Linear Models<a class="headerlink" href="#generalised-linear-models" title="Permalink to this headline">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> is far more than a linear regression powerhouse. It is also capable of fitting a range of <em>generalised</em> linear models, that allow users to fit models to non-normal data, such as binary, count, hierarchical models, and generalised estimating equations. We will explore some of these using the in-built datasets from <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>. These are located under the <strong>non-formula</strong> import of the package, which exposes a far wider range of functions outside of the nice formula interface we have seen so far.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import general statsmodels</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span> <span class="c1"># traditional alias</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="logistic-regression">
+<h2><span class="section-number">3.1. </span>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">#</a></h2>
+<p>We will first explore the use of logistic regression, which allows for the modelling of binary data - such as whether a trial was correct/incorrect, a participant was male/female, and so on. For this example we will use the <a class="reference external" href="http://www.rand.org/health/projects/hie.html">RAND Health Insurance Experiment data</a> which contains a set of variables related to health insurance claims that have been used to investigate key questions in health insurance. The variables are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mdvis</span></code> - Number of outpatient visits to an MD</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lncoins</span></code> - ln(coinsurance + 1), 0 &lt;= coninsurance &lt;= 10</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">idp</span></code> - 1 if individual deductible plan, 0 otherwise</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lpi</span></code> - ln(max(1, annual participation incentive payment)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fmde</span></code> - 0 if idp = 1; ln(max(1, MDE/(0.01 coinsurance))) otherwise</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">physlm</span></code> - 1 if the person has a physical limitation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">disea</span></code> - number of chronic disease</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hlthg</span></code> - 1 if self-rated health is good</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hlthf</span></code> - 1 if self-rated health is fair</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hlthp</span></code> - 1 if self-rated health is poor</p></li>
+</ul>
+<p>We will attempt a simple logistic regression model, predicting whether someone has an individual deductible plan, <code class="docutils literal notranslate"><span class="pre">idp</span></code> (coded as 1 if yes, and zero if no) from a few predictors - number of chronic diseases <code class="docutils literal notranslate"><span class="pre">disea</span></code>, number of outpatient visits <code class="docutils literal notranslate"><span class="pre">mdvis</span></code>, and coinsurance, the amount that has to be paid if a claim is made, <code class="docutils literal notranslate"><span class="pre">lncoins</span></code>.</p>
+<p>To fit logistic regression models, we can use the <code class="docutils literal notranslate"><span class="pre">logit</span></code> function from the formula <code class="docutils literal notranslate"><span class="pre">smf</span></code> interface, and specify our model with a formula string. But first we load the data (with a slightly unusual syntax) from the non-formula interface:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load RAND data</span>
+<span class="n">rand</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">randhie</span><span class="o">.</span><span class="n">load_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">data</span>
+
+<span class="c1"># Fit the model</span>
+<span class="n">logistic_results</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="s1">&#39;idp ~ disea + mdvis + lncoins&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">rand</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Examine the results</span>
+<span class="n">logistic_results</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.537159
+         Iterations 6
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>idp</td>       <th>  No. Observations:  </th>  <td> 20190</td> 
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td> 20186</td> 
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     3</td> 
+</tr>
+<tr>
+  <th>Date:</th>            <td>Thu, 23 Jun 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.06261</td>
+</tr>
+<tr>
+  <th>Time:</th>                <td>11:37:04</td>     <th>  Log-Likelihood:    </th> <td> -10845.</td>
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -11570.</td>
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th>  <td> 0.000</td> 
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   -0.5700</td> <td>    0.034</td> <td>  -16.585</td> <td> 0.000</td> <td>   -0.637</td> <td>   -0.503</td>
+</tr>
+<tr>
+  <th>disea</th>     <td>    0.0122</td> <td>    0.003</td> <td>    4.865</td> <td> 0.000</td> <td>    0.007</td> <td>    0.017</td>
+</tr>
+<tr>
+  <th>mdvis</th>     <td>   -0.0495</td> <td>    0.005</td> <td>  -10.399</td> <td> 0.000</td> <td>   -0.059</td> <td>   -0.040</td>
+</tr>
+<tr>
+  <th>lncoins</th>   <td>   -0.3259</td> <td>    0.009</td> <td>  -34.907</td> <td> 0.000</td> <td>   -0.344</td> <td>   -0.308</td>
+</tr>
+</table></div></div>
+</div>
+<p>Success! But what does all this mean? Logistic regression isn’t as easy to interpret as ordinary least squares, where a single unit increase in the predictor is associated with a coefficient-value change in the outcome. Logistic regression actually models the <em>probability</em> of a positive/yes/one response in the outcome variable, but does so using the <strong>logistic function</strong>, which maps probability space, which is zero to one, to an infinite continuous space of positive and negative.</p>
+<p>The way it does this is by converting probabilities to odds, and then taking the logarithm of the odds - the log-odds. All coefficients in logistic regression represent the change in the log-odds of the outcome with a one-unit increase of the predictor.</p>
+<p>Let’s try to clear this up by looking at the model. The <code class="docutils literal notranslate"><span class="pre">mdvis</span></code> predictor shows a significant, negative relationship with the outcome on the log-odds scale. We have no idea what this means outside of that when the number of visits go up, the probability of having a deductible plan goes down. But if we <em>exponentiate</em> the coefficient, we undo the logarithm and get the odds back, which are somewhat more interpretable. <code class="docutils literal notranslate"><span class="pre">numpy</span></code> can help us here!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use numpy to exponentiate the coefficients</span>
+<span class="c1"># numpy has an .exp function</span>
+<span class="c1"># the coefficients are stored in the .params model attribute</span>
+<span class="n">odds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logistic_results</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+<span class="n">odds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept    0.565516
+disea        1.012295
+mdvis        0.951673
+lncoins      0.721882
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is somewhat more interpretable. As the number of medical visits increases by one, the odds of having an individual deductible plan change by 0.95% (or indeed decrease by 5%).</p>
+<p>Unlike ordinary least squares, understanding a logistic regression model involves working closely with the predictions. We saw how to get those from an <code class="docutils literal notranslate"><span class="pre">ols</span></code> object above, but logistic regression is a different beast. While it does have a <code class="docutils literal notranslate"><span class="pre">.fittedvalues</span></code> attribute, it represents the predictions on the log-odds scale. To get at our predictions, we can do two things:</p>
+<ul class="simple">
+<li><p>Apply the reverse transformation using <code class="docutils literal notranslate"><span class="pre">scipy.special.expit</span></code> on the <code class="docutils literal notranslate"><span class="pre">.fittedvalues</span></code> attribute. This is the inverse-log-odds transform (sometimes known as the inverse logit) and will return the probabilities of a positive response.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">.predict</span></code> method of the fitted model to give the probabilites already back-transformed.</p></li>
+</ul>
+<p>The latter doesn’t invovle an extra import but we will show both:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import scipy function</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">expit</span>
+<span class="n">expit_results</span> <span class="o">=</span> <span class="n">expit</span><span class="p">(</span><span class="n">logistic_results</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">)</span>
+
+<span class="c1"># Use prediction</span>
+<span class="n">logistic_predictions</span> <span class="o">=</span> <span class="n">logistic_results</span><span class="o">.</span><span class="n">predict</span><span class="p">()</span> <span class="c1"># a no-argument call predicts the data the model was fitted on</span>
+
+<span class="c1"># Are these the same?</span>
+<span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">expit_results</span> <span class="o">==</span> <span class="n">logistic_predictions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>These are equivalent operations. Let’s work with the <code class="docutils literal notranslate"><span class="pre">logistic_predictions</span></code> data, and add it directly to the <code class="docutils literal notranslate"><span class="pre">rand</span></code> data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add a column</span>
+<span class="n">rand</span><span class="p">[</span><span class="s1">&#39;predictions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">logistic_results</span><span class="o">.</span><span class="n">predict</span><span class="p">()</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">rand</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mdvis</th>
+      <th>lncoins</th>
+      <th>idp</th>
+      <th>lpi</th>
+      <th>fmde</th>
+      <th>physlm</th>
+      <th>disea</th>
+      <th>hlthg</th>
+      <th>hlthf</th>
+      <th>hlthp</th>
+      <th>predictions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.118646</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Our model has given us the predictions of whether someone has an individual deductible plan. If you’re not used to logistic regression it may be a surprise that you get probabilities back and not zeros and ones, which is what you have in the observed data. Its actually entirely up to <em>you</em> how you interpret those probabilities and to map them onto the observed data, but its tradition that we assume the outcome variable is a <span class="math notranslate nohighlight">\(Bernoulli\)</span> distributed variable (stats speak for its a coin toss with 50/50 heads-tails outcomes). So, we can actually convert the probabilities into zeros and ones with a simple boolean operation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add zeros/ones</span>
+<span class="n">rand</span><span class="p">[</span><span class="s1">&#39;predicted_idp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">rand</span><span class="p">[</span><span class="s1">&#39;predictions&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">.50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">rand</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mdvis</th>
+      <th>lncoins</th>
+      <th>idp</th>
+      <th>lpi</th>
+      <th>fmde</th>
+      <th>physlm</th>
+      <th>disea</th>
+      <th>hlthg</th>
+      <th>hlthf</th>
+      <th>hlthp</th>
+      <th>predictions</th>
+      <th>predicted_idp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.118646</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can now examine how well the model did in terms of its predictions, by computing the terrifyingly named <em>confusion matrix</em>. All this represents is how our model did - for example, when a datapoint <em>did</em> have an individual deductible, how many times did the model say it did? What about the reverse - did it say no when it should have said no?</p>
+<p>Evaluating the performance of logistic regression models is an entire sub-field of statistics in and of itself. You will sometime see terms like precision, recall, accuracy, true positive rate, false positive rate, and many, many more floating around. All of these refer to - basically - is whether the model is saying ‘yes’ when it should and ‘no’ when it should, and there are many variations along that theme. Personally I find this the most confusing part of statistical practice and find myself always referring to <a class="reference external" href="https://en.wikipedia.org/wiki/Template:Diagnostic_testing_diagram">this diagram</a> when working here - I am sure you will too!</p>
+<p>Let’s use the <code class="docutils literal notranslate"><span class="pre">pd.crosstab</span></code> function to build the confusion matrix, which takes two columns of 1/0 responses and counts the values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Crosstabs can be normalised or not, depending on the use of the `normalize` keyword</span>
+<span class="n">confused1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">rand</span><span class="p">[</span><span class="s1">&#39;idp&#39;</span><span class="p">],</span> <span class="n">rand</span><span class="p">[</span><span class="s1">&#39;predicted_idp&#39;</span><span class="p">],</span> <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">confused2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">rand</span><span class="p">[</span><span class="s1">&#39;idp&#39;</span><span class="p">],</span> <span class="n">rand</span><span class="p">[</span><span class="s1">&#39;predicted_idp&#39;</span><span class="p">],</span> <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">confused1</span><span class="p">,</span> <span class="n">confused2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>predicted_idp</th>
+      <th>0</th>
+      <th>1</th>
+      <th>All</th>
+    </tr>
+    <tr>
+      <th>idp</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>14939</td>
+      <td>2</td>
+      <td>14941</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5249</td>
+      <td>0</td>
+      <td>5249</td>
+    </tr>
+    <tr>
+      <th>All</th>
+      <td>20188</td>
+      <td>2</td>
+      <td>20190</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>predicted_idp</th>
+      <th>0</th>
+      <th>1</th>
+      <th>All</th>
+    </tr>
+    <tr>
+      <th>idp</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.739921</td>
+      <td>0.000099</td>
+      <td>0.74002</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.259980</td>
+      <td>0.000000</td>
+      <td>0.25998</td>
+    </tr>
+    <tr>
+      <th>All</th>
+      <td>0.999901</td>
+      <td>0.000099</td>
+      <td>1.00000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>What this hopefully highlights is that, despite obtaining significant coefficients, the predictions of the model here were pretty poor - in fact, our model barely made a positive prediction! Only 2 cases (both wrong, ironically) were predicted as positive. This would be a good time to revise the model and include extra predictors.</p>
+<p>Classification is a surprisingly difficult area of statistics - be sure to look beyond model fit and p-values.</p>
+</section>
+<section id="poisson-or-negative-binomial-models">
+<h2><span class="section-number">3.2. </span>Poisson or Negative Binomial models<a class="headerlink" href="#poisson-or-negative-binomial-models" title="Permalink to this headline">#</a></h2>
+<p>Though not encountered too often in psychological science, data that are distributed as counts are popular across other fields and are becoming more popular in research. Count data represent data that are coded as whole numbers (integers) that start at zero and have no upper limit. Normal regression models like ordinary least squares may make negative count predictions, or fractional predictions, which make little sense (what does it mean to have, say, negative counts of a behaviour, or 2.31201 instance of a behaviour?).</p>
+<p>Fortunately, count data can be modelled relatively simply with either a <span class="math notranslate nohighlight">\(Poisson\)</span> or <span class="math notranslate nohighlight">\(Negative Binomial\)</span> regression. These models are named after the distributions of the same name which describe the probability of count data. The Poisson is a straightforward single-parameter distribution that describes distributions of counts. The single parameter is sometimes called the ‘rate’, and it represents the average of all the count data in a Poisson distribution. So while the Poisson distribution produces whole-integer values, its parameter can be a continuous (positive!) value.</p>
+<p>The negative binomial is traditionally used to describe the probability of observing a number of failures before a single success - e.g. how many times must I roll a dice <em>before</em> I get a 3? The number of ‘fails’ (roll != 3) would be modelled by the negative binomial.</p>
+<p>Sometimes, the single-parameter Poisson does a good enough job in regression contexts. However sometimes we encounter a phenomenon called <em>over-dispersion</em>, which is where the variability of the counts exceeds the average tendency. Fortunately, the negative binomial can be used instead, as it allows for a second parameter to incorporate the variability.</p>
+<p>If this sounds too technical, don’t worry - it really is. The details are not vital; what we need to focus on is if we are dealing with count data, we can start with the Poisson model, check for this overdispersion, and if it appears, switch to the negative binomial.</p>
+<section id="poisson-regression">
+<h3><span class="section-number">3.2.1. </span>Poisson Regression<a class="headerlink" href="#poisson-regression" title="Permalink to this headline">#</a></h3>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">rand</span></code> data, we could think of a different research question, asking whether the number of medical visits <code class="docutils literal notranslate"><span class="pre">mdvis</span></code> (a count variable!) is influenced by the coinsurance payment <code class="docutils literal notranslate"><span class="pre">lncoins</span></code>, as well as the number of chronic diseases, <code class="docutils literal notranslate"><span class="pre">disea</span></code>. Doing this in <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> is very easy - same idea as before; get the formula ready and use the <code class="docutils literal notranslate"><span class="pre">Poisson</span></code> function!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit a Poisson regression</span>
+<span class="n">poisson_results</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="s1">&#39;mdvis ~ lncoins + disea&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">rand</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Summarise</span>
+<span class="n">poisson_results</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 3.141408
+         Iterations 5
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Poisson Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>         <td>mdvis</td>      <th>  No. Observations:  </th>  <td> 20190</td> 
+</tr>
+<tr>
+  <th>Model:</th>                <td>Poisson</td>     <th>  Df Residuals:      </th>  <td> 20187</td> 
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     2</td> 
+</tr>
+<tr>
+  <th>Date:</th>            <td>Thu, 23 Jun 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.04835</td>
+</tr>
+<tr>
+  <th>Time:</th>                <td>11:37:04</td>     <th>  Log-Likelihood:    </th> <td> -63425.</td>
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -66647.</td>
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th>  <td> 0.000</td> 
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>    0.6474</td> <td>    0.009</td> <td>   75.120</td> <td> 0.000</td> <td>    0.630</td> <td>    0.664</td>
+</tr>
+<tr>
+  <th>lncoins</th>   <td>   -0.0597</td> <td>    0.002</td> <td>  -27.788</td> <td> 0.000</td> <td>   -0.064</td> <td>   -0.055</td>
+</tr>
+<tr>
+  <th>disea</th>     <td>    0.0409</td> <td>    0.001</td> <td>   81.383</td> <td> 0.000</td> <td>    0.040</td> <td>    0.042</td>
+</tr>
+</table></div></div>
+</div>
+<p>Great, some results! What do these mean again?</p>
+<p>Like logistic regression, Poisson regression uses a special kind of function to transform the outcome variable in order to model it. It uses a log-transform, which means the coefficients are on the log-scale. That is, as the predictor increases, the log-count of the variable increases by one. As before we can exponentiate these:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exponentiate</span>
+<span class="n">display</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">poisson_results</span><span class="o">.</span><span class="n">params</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept    1.910517
+lncoins      0.942055
+disea        1.041777
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>That is somewhat clearer - as the number of diseases increases, so does the count of doctors visits. And, as the premium goes up, the number of visits go down. This makes sense, the pricier it is to get healthcare, the less likely you are to go.</p>
+<p>As with other kinds of generalized linear models, its often easier to work with the predictions directly to draw some conclusions. If we call the <code class="docutils literal notranslate"><span class="pre">.predict</span></code> method on fitted Poisson regression model, we will get the predictions back with no transformations needed. If you want to verify its correct you can exponentiate the <code class="docutils literal notranslate"><span class="pre">.fittedvalues</span></code> attribute and you will get the same results!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call predict and store the predictions in the rand dataframe</span>
+<span class="n">rand</span><span class="p">[</span><span class="s1">&#39;predicted_mdvis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">poisson_results</span><span class="o">.</span><span class="n">predict</span><span class="p">()</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">rand</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mdvis</th>
+      <th>lncoins</th>
+      <th>idp</th>
+      <th>lpi</th>
+      <th>fmde</th>
+      <th>physlm</th>
+      <th>disea</th>
+      <th>hlthg</th>
+      <th>hlthf</th>
+      <th>hlthp</th>
+      <th>predictions</th>
+      <th>predicted_idp</th>
+      <th>predicted_mdvis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+      <td>0</td>
+      <td>2.544425</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.118646</td>
+      <td>0</td>
+      <td>2.544425</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+      <td>0</td>
+      <td>2.544425</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+      <td>0</td>
+      <td>2.544425</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+      <td>0</td>
+      <td>2.544425</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Something unusual is going on. The predicted values are floating numbers, <em>not</em> count data. Whats happening here? Much like with ordinary least squares and logistic regression, Poisson regression is predicting the <em>expected</em> value of the observed data point - essentially, what the average value of that data point would be, given its values on the predictors. So what we are really looking at here is the parameter or ‘rate’ of the distribution that the data point came from!</p>
+<p>We can expand our fishing adventures by using an alternative function in the results object of a Poisson regression, <code class="docutils literal notranslate"><span class="pre">.predict_prob</span></code>. This function takes the predicted rate (our <code class="docutils literal notranslate"><span class="pre">predicted_mdvis</span></code> variable above, and it does something quite clever:</p>
+<ul class="simple">
+<li><p>It takes all the whole numbers from zero the maximum count value observed in the data.</p></li>
+<li><p>For each datapoint, it takes the predicted rate, and builds a <em>probability mass function</em> from a Poisson distribution with <em>that</em> rate. What’s a probability mass function?! Its just the probability of seeing a specific count value, given a particular Poisson ‘rate’.</p></li>
+<li><p>It returns all of those probabilities to us, and we can see what has the highest value - the most probable count value of our data.</p></li>
+</ul>
+<p>This is going to be a little tricky to unpack, so lets do this step by step in the order above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build a set of values from zero to the maximum observed in our data</span>
+<span class="c1"># We add one because of Pythons &#39;up to but don&#39;t include&#39; rule - see chapter 1!</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">rand</span><span class="p">[</span><span class="s1">&#39;mdvis&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Get the probability mass of each datapoint, given the predicted rate!</span>
+<span class="n">probability_mass</span> <span class="o">=</span> <span class="n">poisson_results</span><span class="o">.</span><span class="n">predict_prob</span><span class="p">()</span>
+
+<span class="c1"># Put these in a dataframe</span>
+<span class="n">prob_mass_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">probability_mass</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">counts</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">prob_mass_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>...</th>
+      <th>68</th>
+      <th>69</th>
+      <th>70</th>
+      <th>71</th>
+      <th>72</th>
+      <th>73</th>
+      <th>74</th>
+      <th>75</th>
+      <th>76</th>
+      <th>77</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.078518</td>
+      <td>0.199784</td>
+      <td>0.254167</td>
+      <td>0.21557</td>
+      <td>0.137125</td>
+      <td>0.069781</td>
+      <td>0.029592</td>
+      <td>0.010756</td>
+      <td>0.003421</td>
+      <td>0.000967</td>
+      <td>...</td>
+      <td>1.203950e-70</td>
+      <td>4.439651e-72</td>
+      <td>1.613766e-73</td>
+      <td>5.783247e-75</td>
+      <td>2.043755e-76</td>
+      <td>7.123537e-78</td>
+      <td>2.449365e-79</td>
+      <td>8.309635e-81</td>
+      <td>2.782006e-82</td>
+      <td>9.192993e-84</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.078518</td>
+      <td>0.199784</td>
+      <td>0.254167</td>
+      <td>0.21557</td>
+      <td>0.137125</td>
+      <td>0.069781</td>
+      <td>0.029592</td>
+      <td>0.010756</td>
+      <td>0.003421</td>
+      <td>0.000967</td>
+      <td>...</td>
+      <td>1.203950e-70</td>
+      <td>4.439651e-72</td>
+      <td>1.613766e-73</td>
+      <td>5.783247e-75</td>
+      <td>2.043755e-76</td>
+      <td>7.123537e-78</td>
+      <td>2.449365e-79</td>
+      <td>8.309635e-81</td>
+      <td>2.782006e-82</td>
+      <td>9.192993e-84</td>
+    </tr>
+  </tbody>
+</table>
+<p>2 rows × 78 columns</p>
+</div></div></div>
+</div>
+<p>OK! Only two datapoints are shown but we have the probability that the datapoint is the count shown in the DataFrame header, given the predicted rate. If we want to collapse this into a single number, all we need to is take index with the maximum value (i.e. , for row one, what is the column with the highest probability?)</p>
+<p><code class="docutils literal notranslate"><span class="pre">pandas</span></code> can help here, with the <code class="docutils literal notranslate"><span class="pre">.idxmax</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assign this back to the rand data</span>
+<span class="n">rand</span><span class="p">[</span><span class="s1">&#39;predicted_count_mdvis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prob_mass_df</span><span class="o">.</span><span class="n">idxmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">rand</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mdvis</th>
+      <th>lncoins</th>
+      <th>idp</th>
+      <th>lpi</th>
+      <th>fmde</th>
+      <th>physlm</th>
+      <th>disea</th>
+      <th>hlthg</th>
+      <th>hlthf</th>
+      <th>hlthp</th>
+      <th>predictions</th>
+      <th>predicted_idp</th>
+      <th>predicted_mdvis</th>
+      <th>predicted_count_mdvis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+      <td>0</td>
+      <td>2.544425</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.118646</td>
+      <td>0</td>
+      <td>2.544425</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+      <td>0</td>
+      <td>2.544425</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+      <td>0</td>
+      <td>2.544425</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>4.61512</td>
+      <td>1</td>
+      <td>6.907755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.73189</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.129403</td>
+      <td>0</td>
+      <td>2.544425</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>OK, now we have predicted counts! What does that look like?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">rand</span><span class="p">[</span><span class="s1">&#39;mdvis&#39;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="n">rand</span><span class="p">[</span><span class="s1">&#39;predicted_count_mdvis&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;predicted_count_mdvis&#39;, ylabel=&#39;mdvis&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/generalised_30_1.png" src="../_images/generalised_30_1.png" />
+</div>
+</div>
+<p>Not great, sadly. The model is really under-predicting - the observed data goes from 0 to 77, but the predictions only top 20. Is our data over-dispersed? We can check this, but it involves a little manual calculation - nothing too bad, though. First we take the models <em>Pearson residuals</em>, square them, and sum them. Then we divide this by the residual degrees of freedom of the model. If the result is greater than 1, we have evidence of overdispersion and should switch our modelling strategy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute overdispersion</span>
+<span class="n">od</span> <span class="o">=</span> <span class="p">(</span><span class="n">poisson_results</span><span class="o">.</span><span class="n">resid_pearson</span> <span class="o">**</span> <span class="mi">2</span> <span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">poisson_results</span><span class="o">.</span><span class="n">df_resid</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">od</span><span class="p">,</span> <span class="n">od</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.437470502281646 True
+</pre></div>
+</div>
+</div>
+</div>
+<p>That might explain our not-so-good predictions.</p>
+</section>
+<section id="negative-binomial-regression">
+<h3><span class="section-number">3.2.2. </span>Negative Binomial Regression<a class="headerlink" href="#negative-binomial-regression" title="Permalink to this headline">#</a></h3>
+<p>Fitting a negative binomial regression at this point should be intuitive - we simply set up the formula, and pass it directly to the <code class="docutils literal notranslate"><span class="pre">negativebinomial</span></code> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit the model </span>
+<span class="n">negbinom_results</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">negativebinomial</span><span class="p">(</span><span class="s1">&#39;mdvis ~ lncoins + disea&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">rand</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Get summary</span>
+<span class="n">negbinom_results</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 2.159078
+         Iterations: 13
+         Function evaluations: 16
+         Gradient evaluations: 16
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>NegativeBinomial Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>         <td>mdvis</td>      <th>  No. Observations:  </th>   <td> 20190</td>  
+</tr>
+<tr>
+  <th>Model:</th>           <td>NegativeBinomial</td> <th>  Df Residuals:      </th>   <td> 20187</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>   <td>     2</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Thu, 23 Jun 2022</td> <th>  Pseudo R-squ.:     </th>   <td>0.01374</td> 
+</tr>
+<tr>
+  <th>Time:</th>                <td>11:37:05</td>     <th>  Log-Likelihood:    </th>  <td> -43592.</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th>  <td> -44199.</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>1.480e-264</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>    0.6264</td> <td>    0.020</td> <td>   31.766</td> <td> 0.000</td> <td>    0.588</td> <td>    0.665</td>
+</tr>
+<tr>
+  <th>lncoins</th>   <td>   -0.0633</td> <td>    0.005</td> <td>  -13.482</td> <td> 0.000</td> <td>   -0.072</td> <td>   -0.054</td>
+</tr>
+<tr>
+  <th>disea</th>     <td>    0.0431</td> <td>    0.001</td> <td>   31.612</td> <td> 0.000</td> <td>    0.040</td> <td>    0.046</td>
+</tr>
+<tr>
+  <th>alpha</th>     <td>    1.3365</td> <td>    0.019</td> <td>   70.288</td> <td> 0.000</td> <td>    1.299</td> <td>    1.374</td>
+</tr>
+</table></div></div>
+</div>
+<p>The interpretation of the coefficients is much the same as the Poisson regression case, with the estimates representing the change in the log-counts of the outcome variable with a one-unit change in the predictor variable. Exponentiating them casts them on an odds scale.</p>
+<p>You may notice the model seems to have an extra estimate - <code class="docutils literal notranslate"><span class="pre">alpha</span></code> - that also has a significance test associated with it. This is the <strong>overdispersion parameter</strong>. Recall that the Poisson distribution has a single parameter, the ‘rate’, or average. If the counts vary a lot, the Poisson will find it difficult to model the variability with a single parameter. The negative binomial distribution has a similar rate or average, but also has an additional parameter, alpha, which controls the variability of the counts. The model tests whether this value is significantly different from zero, which seems to be the case here. It’s another way of examining over-dispersion! Interestingly, if this parameter equals zero, the model is mathematically equivalent to a Poisson regression.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter6"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="statsmodels.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">2. </span>Statistics with <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> and <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code></p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="lmm.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Hierarchical or mixed models</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alex Jones, Ph.D<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
