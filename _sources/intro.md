@@ -1,4 +1,5 @@
 # An introduction to data analysis in Python
+![logo](logo.png)
 
 The Python programming language is one of the most popular programming languages in the world, and is leading the revolution in the data science ecosystem. It emphasises clear, readable code, supports a range of programming approaches, and has a huge array of packages to support almost any need.
 
