@@ -583,18 +583,28 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probit-regression">
+   3.2. Probit regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ordered-probit-regression">
+   3.3. Ordered Probit Regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#poisson-or-negative-binomial-models">
-   3.2. Poisson or Negative Binomial models
+   3.4. Poisson or Negative Binomial models
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#poisson-regression">
-     3.2.1. Poisson Regression
+     3.4.1. Poisson Regression
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#negative-binomial-regression">
-     3.2.2. Negative Binomial Regression
+     3.4.2. Negative Binomial Regression
     </a>
    </li>
   </ul>
@@ -624,18 +634,28 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probit-regression">
+   3.2. Probit regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ordered-probit-regression">
+   3.3. Ordered Probit Regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#poisson-or-negative-binomial-models">
-   3.2. Poisson or Negative Binomial models
+   3.4. Poisson or Negative Binomial models
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#poisson-regression">
-     3.2.1. Poisson Regression
+     3.4.1. Poisson Regression
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#negative-binomial-regression">
-     3.2.2. Negative Binomial Regression
+     3.4.2. Negative Binomial Regression
     </a>
    </li>
   </ul>
@@ -721,10 +741,10 @@ title="Print to PDF"
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     3</td> 
 </tr>
 <tr>
-  <th>Date:</th>            <td>Thu, 23 Jun 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.06261</td>
+  <th>Date:</th>            <td>Tue, 05 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.06261</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>22:02:54</td>     <th>  Log-Likelihood:    </th> <td> -10845.</td>
+  <th>Time:</th>                <td>12:33:28</td>     <th>  Log-Likelihood:    </th> <td> -10845.</td>
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -11570.</td>
@@ -918,7 +938,7 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
-<p>Our model has given us the predictions of whether someone has an individual deductible plan. If you’re not used to logistic regression it may be a surprise that you get probabilities back and not zeros and ones, which is what you have in the observed data. Its actually entirely up to <em>you</em> how you interpret those probabilities and to map them onto the observed data, but its tradition that we assume the outcome variable is a <span class="math notranslate nohighlight">\(Bernoulli\)</span> distributed variable (stats speak for its a coin toss with 50/50 heads-tails outcomes). So, we can actually convert the probabilities into zeros and ones with a simple boolean operation:</p>
+<p>Our model has given us the predictions of whether someone has an individual deductible plan. If you’re not used to logistic regression it may be a surprise that you get probabilities back and not zeros and ones, which is what you have in the observed data. Its actually entirely up to <em>you</em> how you interpret those probabilities and to map them onto the observed data, but its tradition that we assume the outcome variable is a <span class="math notranslate nohighlight">\(Bernoulli\)</span> distributed variable (stats speak for functioning like a coin toss with heads-tails outcomes, which we want to know the probability of heads). We can actually convert the probabilities into zeros and ones with a simple boolean operation, sometimes known as thresholding:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add zeros/ones</span>
@@ -1156,18 +1176,615 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
-<p>What this hopefully highlights is that, despite obtaining significant coefficients, the predictions of the model here were pretty poor - in fact, our model barely made a positive prediction! Only 2 cases (both wrong, ironically) were predicted as positive. This would be a good time to revise the model and include extra predictors.</p>
+<p>What this hopefully highlights is that, despite obtaining significant coefficients, the predictions of the model here were pretty poor - in fact, our model barely made a positive prediction! Only 2 cases (both wrong, ironically) were predicted as positive.</p>
 <p>Classification is a surprisingly difficult area of statistics - be sure to look beyond model fit and p-values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rand</span><span class="o">.</span><span class="n">idp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.25998018821198615
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="probit-regression">
+<h2><span class="section-number">3.2. </span>Probit regression<a class="headerlink" href="#probit-regression" title="Permalink to this headline">#</a></h2>
+<p>If the above discussion of log-odds, odds, conversions to probability via <code class="docutils literal notranslate"><span class="pre">expit</span></code> and the like was confusing, do not worry. That’s because it is. Fortunately, this is statistics, and there’s always another way to think about things. Another type of model that can deal with binary data is known as <strong>probit</strong> regression. In some ways, this is more easily interpretable, but not everyone agrees. Which approach you use is a matter of taste as both logistic regression and probit regression will offer similar levels of predictive power and conclusions - its just their interpretation that is different.</p>
+<p>So how does probit regression work? It assumes that the binary data we’ve observed is a manifestation of an unseen, <em>latent</em> variable, and that variable is normally distributed. The aim of probit regression is thus to predict the latent, normal variable by using something akin to ordinary least squares. Getting a latent variable is all well and good, but we need some probabilities. Those are obtained by using the <strong>cumulative distribution function</strong> (cdf) of a standard (mean zero, standard deviation one) normal distribution. The cdf simply tells us, given an input value, the percentage of the normal distribution that is less than the input value. For example, the very peak of a standard normal distribution is at zero - there is a 50% probability a value from a standard normal is less than zero! Let’s confirm that using <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm</span></code> and its <code class="docutils literal notranslate"><span class="pre">.cdf</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import scipy.stats.norm and make a distribution</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="n">standard_normal</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># What is the CDF of 0? That is, what&#39;s the probability a value from a standard normal is less than zero?</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">standard_normal</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+</pre></div>
+</div>
+</div>
+</div>
+<p>A visualisation can help explain the CDF of the normal distribution, with a few candidate values. The code for the plot is a little tricky, but feel free to examine:</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show different CDFs</span>
+<span class="n">cdfs</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.96</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.96</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">plotting_context</span><span class="p">(</span><span class="s1">&#39;poster&#39;</span><span class="p">):</span>
+    
+    <span class="c1"># Make figure</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;wspace&#39;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span> <span class="s1">&#39;hspace&#39;</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">})</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># Zip axes and cdfs and plot them</span>
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">cdf</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">cdfs</span><span class="p">):</span>
+        
+        <span class="c1"># Plot the density function</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">:=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">standard_normal</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        
+        <span class="c1"># Get CDF</span>
+        <span class="n">cudf</span> <span class="o">=</span> <span class="n">standard_normal</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">cudf</span> <span class="o">&lt;</span> <span class="n">standard_normal</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">)),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.2</span><span class="p">)</span>
+        
+        <span class="c1"># Tidy up</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">standard_normal</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">cdf</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">yticklabels</span><span class="o">=</span><span class="p">[],</span> <span class="n">yticks</span><span class="o">=</span><span class="p">[])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;CDF evaluated at </span><span class="si">{</span><span class="n">cdf</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">% of values smaller than </span><span class="si">{</span><span class="n">cdf</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/generalised_21_0.png" src="../_images/generalised_21_0.png" />
+</div>
+</div>
+<p>The shaded areas above represent the probability that a value from the distribution is less than the evaluated value. So for example, only 2.5% of samples are smaller than -1.96 in a standard normal. Its this property that allows probit regression to offer probabilities that allow for the classification of binary observations. Lets see how this is done below, which is traditionally simple at this point - we will refit the logistic regression model above using probit regression:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use probit</span>
+<span class="n">probit_results</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">probit</span><span class="p">(</span><span class="s1">&#39;idp ~ disea + mdvis + lncoins&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">rand</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Probit summary</span>
+<span class="n">probit_results</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.538534
+         Iterations 5
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Probit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>idp</td>       <th>  No. Observations:  </th>   <td> 20190</td>  
+</tr>
+<tr>
+  <th>Model:</th>                <td>Probit</td>      <th>  Df Residuals:      </th>   <td> 20186</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>   <td>     3</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Tue, 05 Jul 2022</td> <th>  Pseudo R-squ.:     </th>   <td>0.06021</td> 
+</tr>
+<tr>
+  <th>Time:</th>                <td>12:33:29</td>     <th>  Log-Likelihood:    </th>  <td> -10873.</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th>  <td> -11570.</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>8.895e-302</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   -0.3798</td> <td>    0.020</td> <td>  -18.608</td> <td> 0.000</td> <td>   -0.420</td> <td>   -0.340</td>
+</tr>
+<tr>
+  <th>disea</th>     <td>    0.0077</td> <td>    0.001</td> <td>    5.225</td> <td> 0.000</td> <td>    0.005</td> <td>    0.011</td>
+</tr>
+<tr>
+  <th>mdvis</th>     <td>   -0.0253</td> <td>    0.002</td> <td>  -10.188</td> <td> 0.000</td> <td>   -0.030</td> <td>   -0.020</td>
+</tr>
+<tr>
+  <th>lncoins</th>   <td>   -0.1813</td> <td>    0.005</td> <td>  -35.678</td> <td> 0.000</td> <td>   -0.191</td> <td>   -0.171</td>
+</tr>
+</table></div></div>
+</div>
+<p>Contrasting that with the <code class="docutils literal notranslate"><span class="pre">logistic_results</span></code> object, things will look very similar in terms of significance and direction of effects. However, how we interpret the coefficents is different. We no longer think of changes in log-odds here, but the change in the value of the unobserved, latent variable that gave rise to our binary observations, in much the same way one interprets ordinary least squares regression. Whether this is easier is a matter of taste; but you can actually scale probit coefficients by about 1.6 to get the log-odds given by a logistic regression - try it with the parameters above for the probit and logistic regressions!</p>
+<p>Finally, we can examine the predictions of the probit model using the <code class="docutils literal notranslate"><span class="pre">.fittedvalues</span></code> attribute as before:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># View first 5 fitted values</span>
+<span class="n">display</span><span class="p">(</span><span class="n">probit_results</span><span class="o">.</span><span class="n">fittedvalues</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0   -1.110182
+1   -1.160742
+2   -1.110182
+3   -1.110182
+4   -1.110182
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>These are not probabilities - these are the predictions of the latent normal variable. To get the probabilities, we can either use the <code class="docutils literal notranslate"><span class="pre">.predict</span></code> method which will convert it for us, or, we can take these fitted values and put them into a standard normal cumulative density function to get the probability of values being smaller than the given value:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use norm.cdf</span>
+<span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">probit_results</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.13346028, 0.12287333, 0.13346028, ..., 0.1376718 , 0.1376718 ,
+       0.14910515])
+</pre></div>
+</div>
+</div>
+</div>
+<p>And there they are - those probabilities can now be interpreted as the probability an observed binary outcome is zero or one. Traditionally the cutoff is set at .50 like in logistic regression; but this is something a researcher needs to define in advance. Confusion matrices and so on can be computed in the usual way.</p>
+</section>
+<section id="ordered-probit-regression">
+<h2><span class="section-number">3.3. </span>Ordered Probit Regression<a class="headerlink" href="#ordered-probit-regression" title="Permalink to this headline">#</a></h2>
+<p>When you have binary data, logistic or probit regression are great tools to have, albeit with different philosophies. There is a particular class of problem, however, that the <em>latent variable</em> approach of probit regression has great clarity for. In psychology, many studies use Likert (“lick-ert”) scales to collect behavioural responses. Participants may rate how much they agree with a statement or have a preference for a particular stimulus on a scale from 1-7 or -3 to +3, or many other variants.</p>
+<p>Traditionally, this data is analysed with ordinary least squares. But a moment’s reflection illustrates this could be misguided. Participants are forced to response on whole, <em>ordered</em> numbers, but the spacing between those numbers may not be consistent - there’s no way to say that a 3 and a 4 on a 7-point scale have the same intrinsic difference as a 6 and a 7. If you’re predicting values its also worth making sure the predictions resemble the data, which ordinary least squares <em>won’t</em> give you. Indeed, there is a lot of work from the last few years illustrating the issues with predicting ordinal data using ordinary least squares.</p>
+<p>We will investigate the use of <strong>ordinal regression</strong> here, which is capable of solving the above problem. There are many ways to fit a model to ordinal data, but the one we’ll discuss here is a direct continuation of <strong>probit regression</strong>, sometimes called <em>ordered probit regression</em>. The extension is very natural. In probit regression with binary data, we used the cumulative density function of a normal distribution to get probabilities that a datapoint belongs to either class. In ordered probit regression, in addition to estimating the coefficients, we estimate a series of <strong>cutpoints</strong> that carve up the cumulative density function into sections. The model then predicts the latent variable, and we use the cumulative density function to get a probability. Then, we see which <em>region</em> of the distribution the probability falls into. Lets see an example.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">plotting_context</span><span class="p">(</span><span class="s1">&#39;poster&#39;</span><span class="p">):</span>
+    
+    <span class="c1"># Make figure</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">count</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">yticklabels</span><span class="o">=</span><span class="p">[],</span> <span class="n">yticks</span><span class="o">=</span><span class="p">[])</span>
+    
+    <span class="c1"># Plot pdf</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">:=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">standard_normal</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    
+    <span class="c1"># Get a few cutpoints</span>
+    <span class="n">cutpoints</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]</span>
+    
+    <span class="c1"># Add scatter + shading</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">cutpoints</span><span class="p">,</span> <span class="n">standard_normal</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">cutpoints</span><span class="p">),</span> <span class="n">s</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cutpoints</span><span class="p">,</span> <span class="p">[</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">.4</span><span class="p">,</span> <span class="mf">.3</span><span class="p">]):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">standard_normal</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">standard_normal</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">c</span><span class="p">)),</span> 
+                        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+        
+    <span class="c1"># Get ordinal data</span>
+    <span class="n">ordinal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="n">cutpoints</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="c1"># Plot ordinal</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">ordinal</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">count</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;Greys_r&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/generalised_30_0.png" src="../_images/generalised_30_0.png" />
+</div>
+</div>
+<p>In this imaginary dataset, we have a 1,000 data points where responses have been recorded on a scale of 1-4. The figure on the left represents the counts of the observed responses - e.g., 3 is the most common, 4 the least, and so on. The right figure shows the standard normal distribution with three points along the curve, and shaded regions.  The points represent the <strong>cutpoints</strong>, which highlight where a response changes from a 1 to a 2, and so on. The shaded regions represent the areas of the cumulative density function - the greater the shaded area, the more probable a response is. Its clear the lighter shaded region in the 0 - 1.5 area is tied with a greater probability of a response, and indeed ‘3’ is the most common response.</p>
+<p>In this example, we <em>know</em> the cutpoints. As such, we can work out the probability regions via subtraction, and see which probability regions are associated with a response.</p>
+<ul class="simple">
+<li><p>For the ‘1’ responses, the CDF up to a cutpoint of -0.75 will give the probability.</p></li>
+<li><p>For the ‘2’ responses, the CDF up to -0.75 <em>subtracted</em> from the cutpoint at 0.1 will give the probability.</p></li>
+<li><p>For the ‘3’ responses, the CDF up to 0.1 <em>subtracted</em> from the cutpoint at 1.5 will give the probability.</p></li>
+<li><p>For the ‘4’ responses, 1 - the CDF up to 1.5 will give the final probability.</p></li>
+</ul>
+<p>Let’s compute these using the <code class="docutils literal notranslate"><span class="pre">standard_normal</span></code> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Known cuts</span>
+<span class="n">known_cutpoints</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]</span>
+<span class="n">cut1</span> <span class="o">=</span> <span class="n">standard_normal</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">known_cutpoints</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">cut2</span> <span class="o">=</span> <span class="n">standard_normal</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">known_cutpoints</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">standard_normal</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">cutpoints</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">cut3</span> <span class="o">=</span> <span class="n">standard_normal</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">known_cutpoints</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="n">standard_normal</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">cutpoints</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">cut4</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">standard_normal</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">known_cutpoints</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">pr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cut1</span><span class="p">,</span> <span class="n">cut2</span><span class="p">,</span> <span class="n">cut3</span><span class="p">,</span> <span class="n">cut4</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.23 0.31 0.39 0.07]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The probabilities map cleanly onto the actual observed data.</p>
+<p>OK - that’s the latent variable model of ordinal, probit regression. How can we estimate this in Python, and how can we interpret it? We will fit an ordered probit model below, using the <a class="reference external" href="https://www.statsmodels.org/stable/datasets/generated/fair.html">Affairs dataset</a>, which contains data on marital satisfaction (rated on a 1-5 scale), with other variables such as age, years married, and number of children. There are a few more, but we will focus on the latter two.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the dataset</span>
+<span class="n">affairs</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">fair</span><span class="o">.</span><span class="n">load</span><span class="p">()</span><span class="o">.</span><span class="n">data</span>
+<span class="n">affairs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rate_marriage</th>
+      <th>age</th>
+      <th>yrs_married</th>
+      <th>children</th>
+      <th>religious</th>
+      <th>educ</th>
+      <th>occupation</th>
+      <th>occupation_husb</th>
+      <th>affairs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3.0</td>
+      <td>32.0</td>
+      <td>9.0</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>17.0</td>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>0.111111</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3.0</td>
+      <td>27.0</td>
+      <td>13.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>14.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>3.230769</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.0</td>
+      <td>22.0</td>
+      <td>2.5</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>16.0</td>
+      <td>3.0</td>
+      <td>5.0</td>
+      <td>1.400000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.0</td>
+      <td>37.0</td>
+      <td>16.5</td>
+      <td>4.0</td>
+      <td>3.0</td>
+      <td>16.0</td>
+      <td>5.0</td>
+      <td>5.0</td>
+      <td>0.727273</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>27.0</td>
+      <td>9.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>14.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>4.666666</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We will try to predict <code class="docutils literal notranslate"><span class="pre">rate_marriage</span></code> from <code class="docutils literal notranslate"><span class="pre">yrs_married</span></code> and number of <code class="docutils literal notranslate"><span class="pre">children</span></code>. But first, we need to set the <code class="docutils literal notranslate"><span class="pre">rate_marriage</span></code> variable as an ordered category, which we do with pandas <code class="docutils literal notranslate"><span class="pre">pd.Categorical</span></code> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert to categorical</span>
+<span class="n">affairs</span><span class="p">[</span><span class="s1">&#39;marriage_category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">affairs</span><span class="p">[</span><span class="s1">&#39;rate_marriage&#39;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">affairs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rate_marriage</th>
+      <th>age</th>
+      <th>yrs_married</th>
+      <th>children</th>
+      <th>religious</th>
+      <th>educ</th>
+      <th>occupation</th>
+      <th>occupation_husb</th>
+      <th>affairs</th>
+      <th>marriage_category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3.0</td>
+      <td>32.0</td>
+      <td>9.0</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>17.0</td>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>0.111111</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3.0</td>
+      <td>27.0</td>
+      <td>13.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>14.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>3.230769</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.0</td>
+      <td>22.0</td>
+      <td>2.5</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>16.0</td>
+      <td>3.0</td>
+      <td>5.0</td>
+      <td>1.400000</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.0</td>
+      <td>37.0</td>
+      <td>16.5</td>
+      <td>4.0</td>
+      <td>3.0</td>
+      <td>16.0</td>
+      <td>5.0</td>
+      <td>5.0</td>
+      <td>0.727273</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>27.0</td>
+      <td>9.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>14.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>4.666666</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>OK, this looks perfect. Fitting the model is somewhat more involved as ordinal regression isn’t under the usual <code class="docutils literal notranslate"><span class="pre">statsmodels.formula.api</span></code>. We import it from the <code class="docutils literal notranslate"><span class="pre">miscmodels.ordinal_model</span></code> namespace, like so:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import ordinal model</span>
+<span class="kn">from</span> <span class="nn">statsmodels.miscmodels.ordinal_model</span> <span class="kn">import</span> <span class="n">OrderedModel</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also can’t fit this directly with a formula as we have done above. Instead, we use the <code class="docutils literal notranslate"><span class="pre">from_formula</span></code> attribute and fit it as normal, specifying the <code class="docutils literal notranslate"><span class="pre">distr</span></code> keyword as ‘probit’.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit the model</span>
+<span class="n">ordered_probit</span> <span class="o">=</span> <span class="n">OrderedModel</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s1">&#39;marriage_category ~ yrs_married + children&#39;</span><span class="p">,</span> 
+                                           <span class="n">data</span><span class="o">=</span><span class="n">affairs</span><span class="p">,</span> <span class="n">distr</span><span class="o">=</span><span class="s1">&#39;probit&#39;</span><span class="p">)</span>
+
+<span class="c1"># Fit the model</span>
+<span class="n">ordered_results</span> <span class="o">=</span> <span class="n">ordered_probit</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Show summary</span>
+<span class="n">ordered_results</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 1.236414
+         Iterations: 267
+         Function evaluations: 426
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>OrderedModel Results</caption>
+<tr>
+  <th>Dep. Variable:</th>     <td>marriage_category</td> <th>  Log-Likelihood:    </th> <td> -7871.0</td> 
+</tr>
+<tr>
+  <th>Model:</th>               <td>OrderedModel</td>    <th>  AIC:               </th> <td>1.575e+04</td>
+</tr>
+<tr>
+  <th>Method:</th>           <td>Maximum Likelihood</td> <th>  BIC:               </th> <td>1.579e+04</td>
+</tr>
+<tr>
+  <th>Date:</th>              <td>Tue, 05 Jul 2022</td>  <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Time:</th>                  <td>12:33:30</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>No. Observations:</th>       <td>  6366</td>       <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Df Residuals:</th>           <td>  6360</td>       <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Df Model:</th>               <td>     6</td>       <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>yrs_married</th> <td>   -0.0103</td> <td>    0.003</td> <td>   -3.470</td> <td> 0.001</td> <td>   -0.016</td> <td>   -0.004</td>
+</tr>
+<tr>
+  <th>children</th>    <td>   -0.0558</td> <td>    0.015</td> <td>   -3.714</td> <td> 0.000</td> <td>   -0.085</td> <td>   -0.026</td>
+</tr>
+<tr>
+  <th>1/2</th>         <td>   -2.3552</td> <td>    0.045</td> <td>  -52.493</td> <td> 0.000</td> <td>   -2.443</td> <td>   -2.267</td>
+</tr>
+<tr>
+  <th>2/3</th>         <td>   -0.3653</td> <td>    0.052</td> <td>   -6.967</td> <td> 0.000</td> <td>   -0.468</td> <td>   -0.263</td>
+</tr>
+<tr>
+  <th>3/4</th>         <td>   -0.3110</td> <td>    0.029</td> <td>  -10.625</td> <td> 0.000</td> <td>   -0.368</td> <td>   -0.254</td>
+</tr>
+<tr>
+  <th>4/5</th>         <td>   -0.0420</td> <td>    0.018</td> <td>   -2.304</td> <td> 0.021</td> <td>   -0.078</td> <td>   -0.006</td>
+</tr>
+</table></div></div>
+</div>
+<p>We get two coefficients for the predictors, but notice here we also get interesting extra rows - <code class="docutils literal notranslate"><span class="pre">1/2</span></code>, <code class="docutils literal notranslate"><span class="pre">2/3</span></code>, <code class="docutils literal notranslate"><span class="pre">3/4</span></code>, <code class="docutils literal notranslate"><span class="pre">4/5</span></code>. These represent the cutpoints - where responses <em>switch</em> from one to another. The coefficients are interpreted in much the same way as probit regression - one unit increases in the predictor are associated with a coefficient-value change in the latent variable. Somewhat frustratingly, the cutpoints are given on a different scale to the underlying latent variable. Fortunately, we can convert them using the models <code class="docutils literal notranslate"><span class="pre">.transform_threshold_params</span></code>. Let’s take a look:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Transform the cutpoints</span>
+<span class="n">n_cuts</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">ordered_probit</span><span class="o">.</span><span class="n">transform_threshold_params</span><span class="p">(</span><span class="n">ordered_results</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="n">n_cuts</span><span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([       -inf, -2.35518476, -1.661222  , -0.92852619,  0.03032953,
+               inf])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Those cutpoints show where along the distribution the switchpoints are. How to recover the predictions of an ordinal model? There is no <code class="docutils literal notranslate"><span class="pre">.fittedvalues</span></code> attribute here, but if we examine the <code class="docutils literal notranslate"><span class="pre">.predict()</span></code> output of the model, we will see something interesting:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the model to predict</span>
+<span class="n">ordered_results</span><span class="o">.</span><span class="n">predict</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.01806795, 0.06247448, 0.17128938, 0.3623057 , 0.3858625 ],
+       [0.01997206, 0.06688539, 0.17825335, 0.36463794, 0.37025126],
+       [0.00991585, 0.04105062, 0.13233409, 0.33902752, 0.47767191],
+       ...,
+       [0.00991585, 0.04105062, 0.13233409, 0.33902752, 0.47767191],
+       [0.01261749, 0.04869801, 0.14733056, 0.35007508, 0.44127886],
+       [0.00991585, 0.04105062, 0.13233409, 0.33902752, 0.47767191]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>This array represents the probability that each observation (the rows) belongs to each bin along the sliced up distribution (each column). For example, the first column would be the probability the response to marital satisfaction is ‘1’. To recover actual points, we simply take the maximum, which is perhaps clearer in a pandas dataframe:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up ordinal predictions</span>
+<span class="n">ordinal_predictions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ordered_results</span><span class="o">.</span><span class="n">predict</span><span class="p">(),</span>
+                                   <span class="n">columns</span><span class="o">=</span><span class="n">affairs</span><span class="p">[</span><span class="s1">&#39;marriage_category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">)</span>
+
+<span class="c1"># Show the predictions</span>
+<span class="n">ordinal_predictions</span><span class="o">.</span><span class="n">idxmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0       5
+1       5
+2       5
+3       4
+4       5
+       ..
+6361    5
+6362    5
+6363    5
+6364    5
+6365    5
+Length: 6366, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>These can then be compared with the observed data using confusion-matrix based approaches.</p>
 </section>
 <section id="poisson-or-negative-binomial-models">
-<h2><span class="section-number">3.2. </span>Poisson or Negative Binomial models<a class="headerlink" href="#poisson-or-negative-binomial-models" title="Permalink to this headline">#</a></h2>
-<p>Though not encountered too often in psychological science, data that are distributed as counts are popular across other fields and are becoming more popular in research. Count data represent data that are coded as whole numbers (integers) that start at zero and have no upper limit. Normal regression models like ordinary least squares may make negative count predictions, or fractional predictions, which make little sense (what does it mean to have, say, negative counts of a behaviour, or 2.31201 instance of a behaviour?).</p>
+<h2><span class="section-number">3.4. </span>Poisson or Negative Binomial models<a class="headerlink" href="#poisson-or-negative-binomial-models" title="Permalink to this headline">#</a></h2>
+<p>Though not encountered too often in psychological science, data that are distributed as counts are popular across other fields and are becoming more popular in behavioural research. Count data represent data that are coded as whole numbers (integers) that start at zero and have no upper limit. Normal regression models like ordinary least squares may make negative count predictions, or fractional predictions, which make little sense (what does it mean to have, say, negative counts of a behaviour?).</p>
 <p>Fortunately, count data can be modelled relatively simply with either a <span class="math notranslate nohighlight">\(Poisson\)</span> or <span class="math notranslate nohighlight">\(Negative Binomial\)</span> regression. These models are named after the distributions of the same name which describe the probability of count data. The Poisson is a straightforward single-parameter distribution that describes distributions of counts. The single parameter is sometimes called the ‘rate’, and it represents the average of all the count data in a Poisson distribution. So while the Poisson distribution produces whole-integer values, its parameter can be a continuous (positive!) value.</p>
 <p>The negative binomial is traditionally used to describe the probability of observing a number of failures before a single success - e.g. how many times must I roll a dice <em>before</em> I get a 3? The number of ‘fails’ (roll != 3) would be modelled by the negative binomial.</p>
 <p>Sometimes, the single-parameter Poisson does a good enough job in regression contexts. However sometimes we encounter a phenomenon called <em>over-dispersion</em>, which is where the variability of the counts exceeds the average tendency. Fortunately, the negative binomial can be used instead, as it allows for a second parameter to incorporate the variability.</p>
 <p>If this sounds too technical, don’t worry - it really is. The details are not vital; what we need to focus on is if we are dealing with count data, we can start with the Poisson model, check for this overdispersion, and if it appears, switch to the negative binomial.</p>
 <section id="poisson-regression">
-<h3><span class="section-number">3.2.1. </span>Poisson Regression<a class="headerlink" href="#poisson-regression" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.4.1. </span>Poisson Regression<a class="headerlink" href="#poisson-regression" title="Permalink to this headline">#</a></h3>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">rand</span></code> data, we could think of a different research question, asking whether the number of medical visits <code class="docutils literal notranslate"><span class="pre">mdvis</span></code> (a count variable!) is influenced by the coinsurance payment <code class="docutils literal notranslate"><span class="pre">lncoins</span></code>, as well as the number of chronic diseases, <code class="docutils literal notranslate"><span class="pre">disea</span></code>. Doing this in <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> is very easy - same idea as before; get the formula ready and use the <code class="docutils literal notranslate"><span class="pre">Poisson</span></code> function!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1197,10 +1814,10 @@ dtype: float64
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     2</td> 
 </tr>
 <tr>
-  <th>Date:</th>            <td>Thu, 23 Jun 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.04835</td>
+  <th>Date:</th>            <td>Tue, 05 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.04835</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>22:02:54</td>     <th>  Log-Likelihood:    </th> <td> -63425.</td>
+  <th>Time:</th>                <td>12:33:30</td>     <th>  Log-Likelihood:    </th> <td> -63425.</td>
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -66647.</td>
@@ -1638,7 +2255,7 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;predicted_count_mdvis&#39;, ylabel=&#39;mdvis&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/generalised_30_1.png" src="../_images/generalised_30_1.png" />
+<img alt="../_images/generalised_62_1.png" src="../_images/generalised_62_1.png" />
 </div>
 </div>
 <p>Not great, sadly. The model is really under-predicting - the observed data goes from 0 to 77, but the predictions only top 20. Is our data over-dispersed? We can check this, but it involves a little manual calculation - nothing too bad, though. First we take the models <em>Pearson residuals</em>, square them, and sum them. Then we divide this by the residual degrees of freedom of the model. If the result is greater than 1, we have evidence of overdispersion and should switch our modelling strategy.</p>
@@ -1660,7 +2277,7 @@ dtype: float64
 <p>That might explain our not-so-good predictions.</p>
 </section>
 <section id="negative-binomial-regression">
-<h3><span class="section-number">3.2.2. </span>Negative Binomial Regression<a class="headerlink" href="#negative-binomial-regression" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.4.2. </span>Negative Binomial Regression<a class="headerlink" href="#negative-binomial-regression" title="Permalink to this headline">#</a></h3>
 <p>Fitting a negative binomial regression at this point should be intuitive - we simply set up the formula, and pass it directly to the <code class="docutils literal notranslate"><span class="pre">negativebinomial</span></code> function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1692,10 +2309,10 @@ dtype: float64
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>   <td>     2</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Thu, 23 Jun 2022</td> <th>  Pseudo R-squ.:     </th>   <td>0.01374</td> 
+  <th>Date:</th>            <td>Tue, 05 Jul 2022</td> <th>  Pseudo R-squ.:     </th>   <td>0.01374</td> 
 </tr>
 <tr>
-  <th>Time:</th>                <td>22:02:55</td>     <th>  Log-Likelihood:    </th>  <td> -43592.</td> 
+  <th>Time:</th>                <td>12:33:31</td>     <th>  Log-Likelihood:    </th>  <td> -43592.</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th>  <td> -44199.</td> 
