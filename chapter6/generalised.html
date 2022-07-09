@@ -741,10 +741,10 @@ title="Print to PDF"
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     3</td> 
 </tr>
 <tr>
-  <th>Date:</th>            <td>Tue, 05 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.06261</td>
+  <th>Date:</th>            <td>Sat, 09 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.06261</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>12:33:28</td>     <th>  Log-Likelihood:    </th> <td> -10845.</td>
+  <th>Time:</th>                <td>11:56:15</td>     <th>  Log-Likelihood:    </th> <td> -10845.</td>
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -11570.</td>
@@ -1178,18 +1178,6 @@ dtype: float64
 </div>
 <p>What this hopefully highlights is that, despite obtaining significant coefficients, the predictions of the model here were pretty poor - in fact, our model barely made a positive prediction! Only 2 cases (both wrong, ironically) were predicted as positive.</p>
 <p>Classification is a surprisingly difficult area of statistics - be sure to look beyond model fit and p-values.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rand</span><span class="o">.</span><span class="n">idp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.25998018821198615
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="probit-regression">
 <h2><span class="section-number">3.2. </span>Probit regression<a class="headerlink" href="#probit-regression" title="Permalink to this headline">#</a></h2>
@@ -1242,7 +1230,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/generalised_21_0.png" src="../_images/generalised_21_0.png" />
+<img alt="../_images/generalised_20_0.png" src="../_images/generalised_20_0.png" />
 </div>
 </div>
 <p>The shaded areas above represent the probability that a value from the distribution is less than the evaluated value. So for example, only 2.5% of samples are smaller than -1.96 in a standard normal. Its this property that allows probit regression to offer probabilities that allow for the classification of binary observations. Lets see how this is done below, which is traditionally simple at this point - we will refit the logistic regression model above using probit regression:</p>
@@ -1274,10 +1262,10 @@ dtype: float64
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>   <td>     3</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Tue, 05 Jul 2022</td> <th>  Pseudo R-squ.:     </th>   <td>0.06021</td> 
+  <th>Date:</th>            <td>Sat, 09 Jul 2022</td> <th>  Pseudo R-squ.:     </th>   <td>0.06021</td> 
 </tr>
 <tr>
-  <th>Time:</th>                <td>12:33:29</td>     <th>  Log-Likelihood:    </th>  <td> -10873.</td> 
+  <th>Time:</th>                <td>11:56:15</td>     <th>  Log-Likelihood:    </th>  <td> -10873.</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th>  <td> -11570.</td> 
@@ -1379,7 +1367,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/generalised_30_0.png" src="../_images/generalised_30_0.png" />
+<img alt="../_images/generalised_29_0.png" src="../_images/generalised_29_0.png" />
 </div>
 </div>
 <p>In this imaginary dataset, we have a 1,000 data points where responses have been recorded on a scale of 1-4. The figure on the left represents the counts of the observed responses - e.g., 3 is the most common, 4 the least, and so on. The right figure shows the standard normal distribution with three points along the curve, and shaded regions.  The points represent the <strong>cutpoints</strong>, which highlight where a response changes from a 1 to a 2, and so on. The shaded regions represent the areas of the cumulative density function - the greater the shaded area, the more probable a response is. Its clear the lighter shaded region in the 0 - 1.5 area is tied with a greater probability of a response, and indeed ‘3’ is the most common response.</p>
@@ -1670,10 +1658,10 @@ dtype: float64
   <th>Method:</th>           <td>Maximum Likelihood</td> <th>  BIC:               </th> <td>1.579e+04</td>
 </tr>
 <tr>
-  <th>Date:</th>              <td>Tue, 05 Jul 2022</td>  <th>                     </th>     <td> </td>    
+  <th>Date:</th>              <td>Sat, 09 Jul 2022</td>  <th>                     </th>     <td> </td>    
 </tr>
 <tr>
-  <th>Time:</th>                  <td>12:33:30</td>      <th>                     </th>     <td> </td>    
+  <th>Time:</th>                  <td>11:56:16</td>      <th>                     </th>     <td> </td>    
 </tr>
 <tr>
   <th>No. Observations:</th>       <td>  6366</td>       <th>                     </th>     <td> </td>    
@@ -1814,10 +1802,10 @@ Length: 6366, dtype: int64
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     2</td> 
 </tr>
 <tr>
-  <th>Date:</th>            <td>Tue, 05 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.04835</td>
+  <th>Date:</th>            <td>Sat, 09 Jul 2022</td> <th>  Pseudo R-squ.:     </th>  <td>0.04835</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>12:33:30</td>     <th>  Log-Likelihood:    </th> <td> -63425.</td>
+  <th>Time:</th>                <td>11:56:16</td>     <th>  Log-Likelihood:    </th> <td> -63425.</td>
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -66647.</td>
@@ -2255,7 +2243,7 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;predicted_count_mdvis&#39;, ylabel=&#39;mdvis&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/generalised_62_1.png" src="../_images/generalised_62_1.png" />
+<img alt="../_images/generalised_61_1.png" src="../_images/generalised_61_1.png" />
 </div>
 </div>
 <p>Not great, sadly. The model is really under-predicting - the observed data goes from 0 to 77, but the predictions only top 20. Is our data over-dispersed? We can check this, but it involves a little manual calculation - nothing too bad, though. First we take the models <em>Pearson residuals</em>, square them, and sum them. Then we divide this by the residual degrees of freedom of the model. If the result is greater than 1, we have evidence of overdispersion and should switch our modelling strategy.</p>
@@ -2309,10 +2297,10 @@ dtype: float64
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>   <td>     2</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Tue, 05 Jul 2022</td> <th>  Pseudo R-squ.:     </th>   <td>0.01374</td> 
+  <th>Date:</th>            <td>Sat, 09 Jul 2022</td> <th>  Pseudo R-squ.:     </th>   <td>0.01374</td> 
 </tr>
 <tr>
-  <th>Time:</th>                <td>12:33:31</td>     <th>  Log-Likelihood:    </th>  <td> -43592.</td> 
+  <th>Time:</th>                <td>11:56:17</td>     <th>  Log-Likelihood:    </th>  <td> -43592.</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th>  <td> -44199.</td> 
